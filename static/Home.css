@@ -1,0 +1,264 @@
+:root {
+  --primary: #9300D7;
+  --secondary: #FF1489;
+  --white: #fff;
+  --gray: #9b9b9b;
+  --ListC: #60666d;
+  --ListFC: #ffff00;
+}
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 0px;
+  margin-left: 150px;
+  width: 50%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--gray);
+  outline: 0;
+  font-size: 1.3rem;
+  color: var(--gray) ;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+   .form__field::placeholder {
+   color: transparent;
+}
+ .form__field:placeholder-shown ~ .form__label {
+   font-size: 1.3rem;
+   cursor: text;
+   top: 20px;
+}
+
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: var(--gray);
+}
+ .form__field:focus {
+   padding-bottom: 6px;
+   font-weight: 70;
+   border-width: 3px;
+   border-image: linear-gradient(to right, var( --primary ) ,var(--secondary));
+   border-image-slice: 1;
+}
+
+.form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight:700;    
+  }
+  
+/* reset input */
+ .form__field:required, .form__field:invalid {
+   box-shadow: none;
+}
+
+/* The container must be positioned relative: */
+.custom-select {
+  position: relative;
+  font-family: Arial;
+  margin: 2.5%
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-image: linear-gradient( #66c2ff 10%,transparent );
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-image: linear-gradient( transparent 0%,   #66c2ff 50%,transparent 100%);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.btn {
+  margin: 50px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  border: none;
+  color: white;
+  font-size: 30px;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px #eee;
+  border-radius: 60px;
+ }
+
+/* Demo Stuff End -> */
+
+/* <- Magic Stuff Start */
+
+.btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+.btn-2 {
+  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 51%, #ffecd2 100%);
+}
+.btn-1 {
+  background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+}
+/*
+.btn {
+  padding: 10px 80px;
+  font-size: 30px;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid black;
+  outline: none;
+  color: black;
+  background-color: transparent;
+  margin: 40px;
+  font-family: 'Merriweather', serif;
+  white-space: nowrap;
+}
+
+.btn--swap span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px 15px;
+  font-size: 30px;
+  box-sizing: border-box;
+  opacity: 0;
+  color: white;
+  transition: 0.35s ease;
+}
+.btn--swap::before {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background-color:#8d42f5;
+  transition: 0.5s ease;
+}
+.btn--swap:hover:before {
+  width: 100%;
+}
+.btn--swap:hover span {
+  opacity: 1;
+}
+.btn--swapp span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px 15px;
+  font-size: 30px;
+  box-sizing: border-box;
+  opacity: 0;
+  color: white;
+  transition: 0.35s ease;
+}
+.btn--swapp::before {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background-color: #f56942;
+  transition: 0.5s ease;
+}
+.btn--swapp:hover:before {
+  width: 100%;
+}
+.btn--swapp:hover span {
+  opacity: 1;
+}
+*/
+.first{
+  margin-top: 300px; 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 8;
+
+}
+.sec{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 3;
+
+}
+/* demo */
+body {
+  font-family: 'Poppins', sans-serif; 
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  justify-content: center;
+  font-size: 1.5rem;
+  background-color:black;
+  background-image: url("home3.jpg");
+  background-size:cover;
+  background-repeat: no-repeat;
+
+}
