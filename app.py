@@ -3,8 +3,9 @@ from flask import Flask
 from flask import Flask, render_template, url_for, request
 import requests
 import json
-import ScrapPage
+# import ScrapPage
 import PageKeywords
+import ScrapArticle
 app = Flask(__name__,template_folder='templates', static_folder='static')
 
 
@@ -21,10 +22,12 @@ def home():
         k = result['kList']
         c = result['cList']
         # print(url,' ',k,' ',c)
-        article = ScrapPage.scrap_Page(url)
-        pageKeywords = PageKeywords.get_PageKewords(article)
-        return render_template('keywords.html', result=pageKeywords)
+        #article = ScrapPage.scrap_Page(url)
+        title, article, keywords1 = ScrapArticle.scrap(url)
+        print(article)
+        articleKeywords = PageKeywords.get_PageKewords(article, keywords1)
+        return render_template('keywords.html', result=articleKeywords)
     return render_template('keywords.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

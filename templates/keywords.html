@@ -2,23 +2,45 @@
 <html>
 <head>
     <title>Keywords</title>
+    <link href="{{url_for('static',filename='key0.css')}}" rel="stylesheet" type="text/css" media="all">
 </head>
 <body>
-    <table >
-  <tr>
-    <th>Keywords</th>
-    <th>Analysis</th>
-  </tr>
 
-    {% if result %}
-        {% for item in result %}
-            <tr>
-                <td>{{ item }}</td>
-                <td>0</td>
-            </tr>
-        {% endfor %}
-    {% endif %}
-</table>
+    <div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+                                <th class="column1">No.</th>
+								<th class="column2">Keywords</th>
+								<th class="column3">From</th>
+								<th class="column4">Volume</th>
+								<th class="column5">CPC</th>
+								<th class="column6">Competition</th>
+							</tr>
+						</thead>
+						<tbody>
+                            {% if result %}
+                                {% for item in result %}
+								<tr>
+                                    <td class="column1">{{ loop.index0 }}</td>
+									<td class="column2">{{ item }}</td>
+									<td class="column3" style="color:#1e90ff;">original page</td>
+									<td class="column4">0</td>
+									<td class="column5">0</td>
+									<td class="column6">0</td>
+								</tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 
 </html>
