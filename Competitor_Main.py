@@ -5,10 +5,11 @@ Created on Mon Jun 22 23:03:15 2020
 @author: Kaneki Kiddo
 """
 from Competitors.GoogleAPI import getURLs
-from CompTraffic import getWebPageReach
-import Competitor
+from Competitors.CompetitorsKeywords import getKeywordsofCompetitor
+from Competitors.Competitor import Competitor
+from Competitors.CompTraffic import getWebPageReach
 from Similarity import getSimilarity
-from CompetitorsKeywords import getKeywordsofCompetitor
+
 
 def get_all_comps(url, title):
     '''
