@@ -28,26 +28,22 @@ def useGoogleAPI(query, numberOfPages):
             break
         else:
             for i, search_item in enumerate(search_items, start=1):
-                # get the page title
-                title = search_item.get("title")
-                # page snippet
-                snippet = search_item.get("snippet")
-                # extract the page url
                 link = search_item.get("link")
-                # print the results
-                print("="*10, "Result #", resultNumber, "="*10)
-                print("Title:", title)
-                print("Description:", snippet)
-                print("URL:", link, "\n")
                 results.append(link)
                 resultNumber += 1
     return results
 
 
 
-def getComps(url, title):
+def getURLs(url, title):
+    #remember to change values as
+    '''
     number_of_related = 2
     number_of_titled = 3
+    number_of_sites = 1
+    '''  
+    number_of_related = 1
+    number_of_titled = 1
     number_of_sites = 1
     final_results = []
     sites = []
