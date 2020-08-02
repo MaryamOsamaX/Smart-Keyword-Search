@@ -1,5 +1,5 @@
-import Adapted_Lesk
-import Functions
+from Semantics.Adapted_Lesk import *
+from Semantics.Functions import *
 import requests 
         
 #from wordNet
