@@ -2,9 +2,10 @@ from multiprocessing import Pool
 import functools
 
 import ScrapArticle
+from GoogleSuggestion import getGoogleSuggestion
 from KeywordRelevance import calcRelevance
 from Keywords import PageKeywords
-# from Semantics.Semantics import getSemanticForAllKeyWords
+from Semantics.Semantics import getSemanticForAllKeyWords
 from Competitor_Main import get_comps_keywords
 from BingAds.data import *
 
@@ -14,13 +15,23 @@ def getKeywords_Original_Semantics(article, keywords1):
     # keywords['text'] = []
     # keywords['source'] = []
     articleKeywords = PageKeywords.get_PageKewords(article, keywords1)
-    # SemanticsKeywords = getSemanticForAllKeyWords(articleKeywords, article)
-    SemanticsKeywords = []
+
+    f_google = functools.partial(getGoogleSuggestion, articleKeywords)
+    f_semantics = functools.partial(getSemanticForAllKeyWords,articleKeywords, article)
+    #SemanticsKeywords = getSemanticForAllKeyWords(articleKeywords, article)
+    with Pool() as pool:
+        res = pool.map(smap, [f_google, f_semantics])
+
+    googleSuggestionKeywords = res[0]
+    SemanticsKeywords = res[1]
+
     for k in articleKeywords:
         keyword = {}
         keyword['text'] = k
         keyword['source'] = 'original'
         keywords.append(keyword)
+
+    keywords.extend(googleSuggestionKeywords)
 
     for i in SemanticsKeywords:
         for k in i:
@@ -49,14 +60,17 @@ def searchForKeywords(url):
     keywords = res[0]
     comps_keywords = res[1]
     suggested_keywords = res[2]
+    keyname =[n['text'] for n in keywords]
     for k in comps_keywords:
-        if k not in keywords:
+        if k not in keyname:
             keyword = {}
             keyword['text'] = k
             keyword['source'] = 'competitors'
             keywords.append(keyword)
+            keyname.append(k)
+
     for k in suggested_keywords:
-        if k not in keywords:
+        if k not in keyname:
             keyword = {}
             keyword['text'] = k
             keyword['source'] = 'suggested'
