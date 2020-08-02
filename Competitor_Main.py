@@ -30,30 +30,55 @@ def get_all_comps(url, title):
         s = Competitor()
         s.url = urls[i]
         competitors.append(s)
-        
-    #2- get traffic reach
+
+    # 2- get traffic reach
     for comp in competitors:
         comp.traffic_reach = getWebPageReach(comp.url)
-    
-    #3- get similarity
+
+    # 3- get similarity
     for comp in competitors:
         comp.similarity = getSimilarity(url, comp.url)
-    
-    #4- get keywords
+
+    # 4- get keywords
     for comp in competitors:
         comp.keywords = getKeywordsofCompetitor(comp.url)
-        
+
     return competitors
 
 
+def get_comps_keywords(url, title):#till finish all
+    # urls = getURLs(url, title)
+    keywords = []
+    # for l in urls:
+    #     keywords.extend(getKeywordsofCompetitor(l))
+
+    return keywords
+
+
+def get_comps(url, title, article): #Should we add title???
+    competitors = []
+    urls = getURLs(url, title)
+    for i in range(len(urls)):
+        s = Competitor()
+        s.url = urls[i]
+        competitors.append(s)
+
+    # 2- get traffic reach
+    for comp in competitors:
+        comp.traffic_reach = getWebPageReach(comp.url)
+
+    # 3- get similarity
+    for comp in competitors:
+        comp.similarity = getSimilarity(article, comp.url)
+
+    return competitors
+
 
 if __name__ == '__main__':
-    
     #########################################################
     url = "https://blog.hubspot.com/marketing/what-is-digital-marketing"
     title = "what is digital marketing"
     #########################################################
-    
-    #get related comps
-    results = get_all_comps(url, title)
 
+    # get related comps
+    results = get_all_comps(url, title)

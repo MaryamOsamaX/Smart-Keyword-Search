@@ -1,5 +1,4 @@
 from newspaper import Article
-import YAKE
 
 
 def scrap(url):
