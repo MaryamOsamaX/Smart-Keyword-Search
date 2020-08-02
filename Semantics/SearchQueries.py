@@ -3,10 +3,10 @@
 from pytrends.request import TrendReq
 def getSearchQueries(searchWord):
     pytrends = TrendReq(hl='en-US', tz=360)
-    kw_list = [word]
+    kw_list = [searchWord]
     pytrends.build_payload(kw_list, cat=0, timeframe='today 5-y', geo='', gprop='')
     df=pytrends.related_queries()
-    et=pytrends.suggestions(sen)
+    et=pytrends.suggestions(searchWord)
     print(et)
     print(df)
     
