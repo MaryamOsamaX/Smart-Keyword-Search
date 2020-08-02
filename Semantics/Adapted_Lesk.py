@@ -5,7 +5,7 @@ from nltk.corpus import stopwords
 from itertools import chain
 from pywsd.tokenize import word_tokenize
 from pywsd.utils import lemmatize, porter, lemmatize_sentence, synset_properties
-
+from nltk.corpus import wordnet as wn
 pywsd_stopwords = [u"'s", u"``", u"`"]
 EN_STOPWORDS = set(stopwords.words('english') + list(string.punctuation) + pywsd_stopwords)
 
