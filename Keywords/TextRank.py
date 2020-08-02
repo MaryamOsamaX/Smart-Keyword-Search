@@ -1,7 +1,7 @@
 import spacy
 import pytextrank
 
-def get_TextRank(article):
+def get_TextRank(article,n):
     nlp = spacy.load("en_core_web_sm")
 
     # add PyTextRank to the spaCy pipeline
@@ -13,7 +13,7 @@ def get_TextRank(article):
     # examine the top-ranked phrases in the document
     topKeywords = []
 
-    for i in range(10):
+    for i in range(n):
         # print(type(doc._.phrases[i].text))
         # print(type(str(doc._.phrases[i].text)))
         topKeywords.append(doc._.phrases[i].text)

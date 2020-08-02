@@ -1,7 +1,6 @@
-import RAKE
-import TextRank
-import RAKE_NLTK
-import YAKE
+from Keywords import TextRank, YAKE
+
+
 def addUnique(bigList,addedList):
     for i in addedList:
         if i not in bigList:
@@ -16,7 +15,7 @@ def get_PageKewords(article, additionalKeywords):
 
     textRankKeywords = TextRank.get_TextRank(article, 10)
     k_y2 = YAKE.get_keywords(article, 2, 10)
-    k_y4 = YAKE.get_keywords(article, 4, 10)
+    k_y4 = YAKE.get_keywords(article, 3, 10)
     pageKeywords = k_y2
     addUnique(pageKeywords, k_y4)
     addUnique(pageKeywords, textRankKeywords)

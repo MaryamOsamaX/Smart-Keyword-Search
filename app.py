@@ -1,33 +1,39 @@
-from flask import Flask
+from flask import Flask, render_template, request
+from ScrapArticle import *
+import Keywords_Search
+import Competitor_Main
 
-from flask import Flask, render_template, url_for, request
-import requests
-import json
-# import ScrapPage
-import PageKeywords
-import ScrapArticle
-app = Flask(__name__,template_folder='templates', static_folder='static')
+app = Flask(__name__, template_folder='templates', static_folder='static')
 
 
-#1
+# 1
 @app.route('/')
 def hello_world():
     return render_template('Home.html')
 
+
 @app.route("/keywords/", methods=['POST', 'GET'])
-def home():
+def findKeywords():
     if request.method == 'POST':
         result = request.form
-        url =result['URL']
-        k = result['kList']
-        c = result['cList']
-        # print(url,' ',k,' ',c)
-        #article = ScrapPage.scrap_Page(url)
-        title, article, keywords1 = ScrapArticle.scrap(url)
-        print(article)
-        articleKeywords = PageKeywords.get_PageKewords(article, keywords1)
-        return render_template('keywords.html', result=articleKeywords)
+        url = result['URL']
+        keywords = Keywords_Search.findKeywords(url)
+
+        return render_template('keywords.html', result=keywords)
     return render_template('keywords.html')
+
+
+@app.route("/competitors/", methods=['POST', 'GET'])
+def findCompetitors():
+    if request.method == 'POST':
+        result = request.form
+        url = result['URL']
+        title, article, k_1 = scrap(url)
+        competitors = Competitor_Main.get_comps(url, title, article)
+
+        return render_template('competitors.html', result=competitors)
+    return render_template('competitors.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
