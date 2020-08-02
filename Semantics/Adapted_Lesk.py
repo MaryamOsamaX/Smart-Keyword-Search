@@ -1,6 +1,6 @@
 #!pip install pywsd==1.2.4
 # Python Word Sense Disambiguation (pyWSD)
-
+import string 
 from nltk.corpus import stopwords
 from itertools import chain
 from pywsd.tokenize import word_tokenize
