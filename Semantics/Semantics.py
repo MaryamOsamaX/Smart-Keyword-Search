@@ -68,9 +68,9 @@ def getSemanticsForSentence(sen , keyword):
                 i+=1
     return SentenceWords
     
-#input format -> ["coronavirus" , "pagerank implementation"]
+#input format -> ["coronavirus" , "pagerank implementation"] , text
 
-def getSemanticForAllKeyWords(keywordsList):
+def getSemanticForAllKeyWords(keywordsList ,text):
     #
     #....
     #
