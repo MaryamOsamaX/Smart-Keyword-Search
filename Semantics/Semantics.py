@@ -1,5 +1,6 @@
 from Semantics.Adapted_Lesk import *
 from Semantics.Functions import *
+from nltk.corpus import wordnet as wn
 import requests 
         
 #from wordNet
