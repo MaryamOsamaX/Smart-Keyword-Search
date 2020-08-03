@@ -244,8 +244,8 @@ def getKeywordData(keywords, url):
         ExpandIdeas=False
     )
     keyword_ideas = get_keyword_ideas_response
-    # print(keyword_ideas)
-    keywords = []
+    #print(keyword_ideas['KeywordIdea'])
+    keywords_data = []
     ad_group_ids = []
     for keyword_idea in keyword_ideas['KeywordIdea']:
         ad_group_ids.append(keyword_idea.AdGroupId)
@@ -306,7 +306,7 @@ def getKeywordData(keywords, url):
         k['impressions'] = 0.0
         k['totalCost'] = 0.0
         k['source'] = ''
-        keywords.append(k)
+        keywords_data.append(k)
         index = (keyword_idea.AdGroupId * -1) - seed_offset if keyword_idea.AdGroupId is not None else 0
         ad_group_estimators['AdGroupEstimator'][index].KeywordEstimators.KeywordEstimator.append(keyword_estimator)
 
@@ -364,24 +364,24 @@ def getKeywordData(keywords, url):
     estimates = e['KeywordEstimates']['KeywordEstimate']
 
     for i in range(len(estimates)):
-        keywords[i]['avgCpc'] = round((exist(estimates[i].Maximum.AverageCpc, estimates[i].Maximum.AverageCpc)
-                                       + exist(estimates[i].Minimum.AverageCpc, estimates[i].Minimum.AverageCpc)) / 2,
-                                      2)
-        keywords[i]['avgPosition'] = round(
+        keywords_data[i]['avgCpc'] = round((exist(estimates[i].Maximum.AverageCpc, estimates[i].Maximum.AverageCpc)
+                                            + exist(estimates[i].Minimum.AverageCpc, estimates[i].Minimum.AverageCpc)) / 2,
+                                           2)
+        keywords_data[i]['avgPosition'] = round(
             (exist(estimates[i].Maximum.AveragePosition, estimates[i].Maximum.AveragePosition)
              + exist(estimates[i].Minimum.AveragePosition, estimates[i].Minimum.AveragePosition)) / 2, 2)
-        keywords[i]['clicks'] = round((exist(estimates[i].Maximum.Clicks, estimates[i].Maximum.Clicks)
-                                       + exist(estimates[i].Minimum.Clicks, estimates[i].Minimum.Clicks)) / 2, 2)
-        keywords[i]['ctr'] = round((exist(estimates[i].Maximum.Ctr, estimates[i].Maximum.Ctr)
-                                    + exist(estimates[i].Minimum.Ctr, estimates[i].Minimum.Ctr)) / 2, 2)
-        keywords[i]['impressions'] = round(
+        keywords_data[i]['clicks'] = round((exist(estimates[i].Maximum.Clicks, estimates[i].Maximum.Clicks)
+                                            + exist(estimates[i].Minimum.Clicks, estimates[i].Minimum.Clicks)) / 2, 2)
+        keywords_data[i]['ctr'] = round((exist(estimates[i].Maximum.Ctr, estimates[i].Maximum.Ctr)
+                                         + exist(estimates[i].Minimum.Ctr, estimates[i].Minimum.Ctr)) / 2, 2)
+        keywords_data[i]['impressions'] = round(
             (exist(estimates[i].Maximum.Impressions, estimates[i].Maximum.Impressions)
              + exist(estimates[i].Minimum.Impressions, estimates[i].Minimum.Impressions)) / 2, 2)
-        keywords[i]['totalCost'] = round((exist(estimates[i].Maximum.TotalCost, estimates[i].Maximum.TotalCost)
-                                          + exist(estimates[i].Minimum.TotalCost, estimates[i].Minimum.TotalCost)) / 2,
-                                         2)
+        keywords_data[i]['totalCost'] = round((exist(estimates[i].Maximum.TotalCost, estimates[i].Maximum.TotalCost)
+                                               + exist(estimates[i].Minimum.TotalCost, estimates[i].Minimum.TotalCost)) / 2,
+                                              2)
 
-    return keywords
+    return keywords_data
 
 
 def auth():
