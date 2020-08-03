@@ -1,4 +1,5 @@
 from Keywords import TextRank, YAKE
+from Keywords.RAKE import get_RAKE
 
 
 def addUnique(bigList,addedList):
@@ -12,18 +13,27 @@ def get_PageKewords(article, additionalKeywords):
     #print('textRankKeywords : ',textRankKeywords)
     # rakeNltkKeywords = RAKE_NLTK.get_RAKE_nlt(article)
     # print('rakeNltkKeywords : ',rakeNltkKeywords)
-
+    # print('article')
+    # print(article)
     textRankKeywords = TextRank.get_TextRank(article, 10)
-    k_y2 = YAKE.get_keywords(article, 2, 10)
-    k_y4 = YAKE.get_keywords(article, 3, 10)
-    pageKeywords = k_y2
+    # print('TextRank: ')
+    # print(textRankKeywords)
+    # k_y2 = YAKE.get_keywords(article, 2, 10)
+    # print('YAKEn2: ')
+    # print(k_y2)
+    k_y4 = YAKE.get_keywords(article, 3, 20)
+    # print('YAKEn3: ')
+    # print(k_y4)
+    rake= get_RAKE(article)
+    # print('Rake')
+    # print(rake)
+    pageKeywords = additionalKeywords
     addUnique(pageKeywords, k_y4)
     addUnique(pageKeywords, textRankKeywords)
-    addUnique(pageKeywords, additionalKeywords)
+    addUnique(pageKeywords, rake)
+    # print('all')
+    # print(pageKeywords)
 
-    for item in pageKeywords:
-        if item.isnumeric():
-            pageKeywords.remove(item)
     return pageKeywords
 
 if __name__ == '__main__':
