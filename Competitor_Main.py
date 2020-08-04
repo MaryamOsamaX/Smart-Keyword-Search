@@ -5,7 +5,7 @@ Created on Mon Jun 22 23:03:15 2020
 @author: Kaneki Kiddo
 """
 from Competitors.GoogleAPI import getURLs
-from Competitors.CompetitorsKeywords import getKeywordsofCompetitor
+from BingAds.data import getKeywordsByURL
 from Competitors.Competitor import Competitor
 from Competitors.CompTraffic import getWebPageReach
 from Similarity import getSimilarity
@@ -40,15 +40,21 @@ def get_all_comps(url, title):
         comp.similarity = getSimilarity(url, comp.url)
 
     # 4- get keywords
+    count = 0
     for comp in competitors:
-        comp.keywords = getKeywordsofCompetitor(comp.url)
+        comp.keywords = get_comp_keywords(comp.url)
+        count += 1
+        print(count)
+        if(count >= 10):
+            break
 
     return competitors
 
 
-def get_comps_keywords(url, title):#till finish all
+def get_comp_keywords(url):#till finish all
     # urls = getURLs(url, title)
     keywords = []
+    keywords = getKeywordsByURL(url)
     # for l in urls:
     #     keywords.extend(getKeywordsofCompetitor(l))
 
