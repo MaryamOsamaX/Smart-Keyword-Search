@@ -39,8 +39,8 @@ def getWordsByConceptNet(imbg_word ,oneWord ,pos):
         obj = response.json()
 
         for edge in obj['edges']:
-            wordFromList1 = wordnet.synsets(imbg_word)
-            wordFromList2 = wordnet.synsets(edge['start']['label'])
+            wordFromList1 = wn.synsets(imbg_word)
+            wordFromList2 = wn.synsets(edge['start']['label'])
             if edge['end']['label'] == imbg_word :
                 words.append((edge['start']['label'] ,edge['weight']))
 
