@@ -2,42 +2,52 @@ from Semantics.Adapted_Lesk import *
 from Semantics.Functions import *
 from nltk.corpus import wordnet as wn
 import requests 
+import itertools
         
 #from wordNet
-def getSynonymsAndRelatedKeyword(synset, lch_threshold=2.26):
+def getSynonymsAndRelatedKeyword(synset,oneWord ,  lch_threshold=2.26):
     res=[]
-    for net in wn.all_synsets():
-        try:
-            lch = wn.lch_similarity(synset ,net)
-            # The value to compare the LCH to was found empirically.
-            # (The value is very application dependent. Experiment!)
-            if lch >= lch_threshold:
-                 for word in net.lemmas():
-                        res.append((word.name() , lch))
-                        
-        except:
-                continue
-          
+    print(synset)
+    if (oneWord== True):
+        for net in wn.all_synsets():
+            try:
+                lch = wn.lch_similarity(synset ,net)
+                # The value to compare the LCH to was found empirically.
+                # (The value is very application dependent. Experiment!)
+                if lch >= lch_threshold:
+                     for word in net.lemmas():
+                            res.append((word.name() , lch))
+
+            except:
+                    continue
+    else:
+        for l in synset.lemmas(): 
+            res.append((l.name(),1)) 
+
     return res
 
 
 #from conceptNet
-def getWordsByConceptNet(imbg_word , pos):
+def getWordsByConceptNet(imbg_word ,oneWord ,pos):
     words=[]
     relations=['Synonym','RelatedTo','HasContext','SimilarTo','IsA','PartOf','HasA',
                'AtLocation','HasSubevent','HasFirstSubevent','HasLastSubevent','HasPrerequisite',
                'HasProperty','CreatedBy','DistinctFrom','DerivedFrom','DefinedAs','MannerOf','LocatedNear']
-
+    
     for r in relations:
         response = requests.get('http://api.conceptnet.io/query?node=/c/en/'+imbg_word+'/'+pos+'&other=/c/en&rel=/r/'+r)
         obj = response.json()
 
         for edge in obj['edges']:
-            if edge['end']['label'] == imbg_word:
+            wordFromList1 = wn.synsets(imbg_word)
+            wordFromList2 = wn.synsets(edge['start']['label'])
+            if edge['end']['label'] == imbg_word :
                 words.append((edge['start']['label'] ,edge['weight']))
 
             else:
                 words.append((edge['end']['label'],edge['weight']))
+        if(oneWord!=True):
+            break
 
     return sort(removeDuplicate(words))
     
@@ -54,20 +64,43 @@ def getSemanticsForSentence(sen , keyword):
                 i+=1
             else:
                 pos=getPos(sen , i)
+                print(w)
                 print(pos)
                 if (pos != None):
-                    sense=adapted_lesk(sen , w , pos)
-                    wordsNet=getSynonymsAndRelatedKeyword(sense)
-                    wordsNet=sort(wordsNet)
-                    wordsNet=cleanData(wordsNet)
+                    if(len(wn.synsets(w))!=0):
+                        #print(wn.synsets(w))
+                        sense=adapted_lesk(sen , w , pos)
+
+                        if(len(KeywordList)!=1):
+                            wordsNet=getSynonymsAndRelatedKeyword(sense ,False)
+                        else:
+                            wordsNet=getSynonymsAndRelatedKeyword(sense ,True)
+
+                        wordsNet=sort(wordsNet)
+                        wordsNet=cleanData(wordsNet)
                     
-                    wordsConcept=getWordsByConceptNet(w , pos)
-                    allWords= removeDuplicate(wordsNet + wordsConcept )
+                    if(len(KeywordList)!=1):
+                        wordsConcept=getWordsByConceptNet(w ,False, pos)
+                    else:
+                        wordsConcept=getWordsByConceptNet(w ,True, pos)
+
+                        
+                    allWords= removeDuplicate([(w,1)]+ wordsNet +wordsConcept  )
                     SentenceWords.append(allWords)
+                    wordsNet=[]
                 else:
-                    SentenceWords.append(w) 
+                    SentenceWords.append([(w,1)]) 
                 i+=1
-    return SentenceWords
+    ok =list(itertools.product(*SentenceWords))
+    sem=[]
+    for t in ok:
+        r=""
+        for w in t:
+            r+=" "
+            r+=w[0]
+        sem.append(r)
+    
+    return sem
     
 #input format -> ["coronavirus" , "pagerank implementation"] , text
 

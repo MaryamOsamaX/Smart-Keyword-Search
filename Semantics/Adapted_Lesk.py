@@ -52,9 +52,7 @@ def getSignaturesForWord(ambiguous_word: str, pos: str = None) -> dict:
     for ss in wn.synsets(ambiguous_word, pos):
         ss_sign[ss] = synsetSignatures(ss)
     
-    # Matching exact words may cause sparsity, so optional matching for stems.
-    # Not advisible to use thus left out of the synsets_signatures()
-    ss_sign = {ss:[porter.stem(s) for s in signature]
+    ss_sign = {ss:[lemmatize(s) for s in signature]
                    for ss, signature in ss_sign.items()}
     
     return ss_sign
@@ -76,19 +74,20 @@ def compare_overlaps_greedy(context: list, synsets_signatures: dict) -> "wn.Syns
     return lesk_sense
     
 def adapted_lesk(context_sentence: str, ambiguous_word: str,pos: str = None) -> "wn.Synset":
-   
+    
     # Ensure that ambiguous word is a lemma.
     ambiguous_word = lemmatize(ambiguous_word)
     
     # If ambiguous word not in WordNet return None
-    if not wn.synsets(ambiguous_word):
+    if (wn.synsets(ambiguous_word)==None):
         return None
+    
     
     # Get the signatures for each synset.
     ss_sign = getSignaturesForWord(ambiguous_word, pos=pos)
-    # Disambiguate the sense in context.
     
-    lemmatize_sentence(context_sentence)
+    # Disambiguate the sense in context.
+    print(lemmatize_sentence(context_sentence))
     context_sentence = context_sentence.split()
     return compare_overlaps_greedy(context_sentence, ss_sign)
     
