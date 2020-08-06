@@ -1,6 +1,7 @@
 from Semantics.Adapted_Lesk import *
 from Semantics.Functions import *
 from nltk.corpus import wordnet as wn
+from googletrans import Translator
 import requests 
 import itertools
         
@@ -101,6 +102,30 @@ def getSemanticsForSentence(sen , keyword):
         sem.append(r)
     
     return sem
+
+def paraphrasingKeywords(keywordList):
+    languages=["ko","ja","es","ar","it","ga" ,"fr","de" ,"cs","bg","hr","el","pt","no","ru","ro",
+              "th" ,"sv","nl","pl"]
+    translator = Translator()
+    allBackTranslated=[]
+    for lang in languages:
+        translation=translator.translate(keywordList, dest=lang)
+        translated=[]
+        for t in translation:
+            translated.append(t.text)
+        translation=translator.translate(translated, src=lang)
+        backTraslated=[]
+        for t in translation:
+            backTraslated.append(t.text.lower())
+        allBackTranslated.append(backTraslated)
+        finalRes=[]
+        for i in range(0 , len(allBackTranslated[0])):
+            temp=[]
+            for a in allBackTranslated:
+                temp.append(a[i])
+            finalRes.append(list(set(temp)))
+            
+    return finalRes
     
 #input format -> ["coronavirus" , "pagerank implementation"] , text
 
