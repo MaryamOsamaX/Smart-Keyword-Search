@@ -35,6 +35,10 @@ def get_all_comps(url, title):
     for comp in competitors:
         comp.traffic_reach = getWebPageReach(comp.url)
 
+    #sort competitors based on traffic_reach descending
+    #from largest to smallest
+    competitors.sort(reverse=True, key= sort_based_on_traffic_reach)
+
     # 3- get similarity
     for comp in competitors:
         comp.similarity = getSimilarity(url, comp.url)
@@ -49,6 +53,9 @@ def get_all_comps(url, title):
             break
 
     return competitors
+
+def sort_based_on_traffic_reach(elem):
+    return elem.traffic_reach
 
 
 def get_comp_keywords(url):#till finish all
