@@ -21,3 +21,4 @@ flask
 re
 newspaper3k
 bingads
+googletrans
