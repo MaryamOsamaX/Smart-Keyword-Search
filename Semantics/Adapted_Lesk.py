@@ -87,7 +87,7 @@ def adapted_lesk(context_sentence: str, ambiguous_word: str,pos: str = None) -> 
     ss_sign = getSignaturesForWord(ambiguous_word, pos=pos)
     
     # Disambiguate the sense in context.
-    print(lemmatize_sentence(context_sentence))
+    #print(lemmatize_sentence(context_sentence))
     context_sentence = context_sentence.split()
     return compare_overlaps_greedy(context_sentence, ss_sign)
     

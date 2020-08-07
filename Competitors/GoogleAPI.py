@@ -48,11 +48,11 @@ def getURLs(url, title):
     final_results = []
     sites = []
     
-    print("Loading Related...")
+    #print("Loading Related...")
     results_related = useGoogleAPI("related: " + url, number_of_related)
-    print("Done\n" + "Loading Titled...")
+    #print("Done\n" + "Loading Titled...")
     results_titled = useGoogleAPI("intitle: " + title, number_of_titled)
-    print("Done")
+    #print("Done")
     total = results_related + results_titled
     total = list(dict.fromkeys(total))
     
@@ -64,7 +64,7 @@ def getURLs(url, title):
         else:
             final_results.append(item)
     if(len(final_results) < 50):
-        print("Loading Sites...")
+        #print("Loading Sites...")
         for site in sites:
             results_sites = useGoogleAPI(title + " site: " + site, number_of_sites)
             for item in results_sites:

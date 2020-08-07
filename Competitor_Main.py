@@ -67,6 +67,13 @@ def get_comp_keywords(url):#till finish all
 
     return keywords
 
+def get_comps_keywords(url, title):  # till finish all
+    urls = getURLs(url, title)
+    keywords = []
+    for i in range(10):
+        keywords.extend(getKeywordsByURL(urls[i]))
+    return keywords
+
 
 def get_comps(url, title, article): #Should we add title???
     competitors = []
