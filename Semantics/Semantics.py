@@ -77,6 +77,7 @@ def getSynonymsMerriamWebster(word , pos):
 def getSemanticsForSentence(sen , keyword):
     senToken=sen.split()
     SentenceWords=[]
+    wordsNet=[]
     KeywordList=keyword.split()
     
     for word in KeywordList:
@@ -97,18 +98,30 @@ def getSemanticsForSentence(sen , keyword):
                             wordsNet=getSynonymsAndRelatedKeyword(sense ,False)
                         else:
                             wordsNet=getSynonymsAndRelatedKeyword(sense ,True)
-
+                    
                         wordsNet=sort(wordsNet)
                         wordsNet=cleanData(wordsNet)
+                      
                     
                     if(len(KeywordList)!=1):
                         wordsConcept=getWordsByConceptNet(w ,False, pos)
                     else:
                         wordsConcept=getWordsByConceptNet(w ,True, pos)
-
-                        
-                    allWords= removeDuplicate([(w,1)]+ wordsNet +wordsConcept  )
+                    
+                    '''  
+                    for Adding Merriam-Webster API
+                    posM=''
+                    if  (pos=='n'): posM+='noun' 
+                    elif(pos=='v'): posM+='verb'
+                    elif(pos=='a'): posM+='adjective'
+                    else :          posM+='adverb'
+                    synMW=getSynonymsMerriamWebster(w ,posM)
+                    ''' 
+                   
+                    allWords= removeDuplicate([(w,1)]+ wordsNet +wordsConcept)
                     SentenceWords.append(allWords)
+        
+                    
                     wordsNet=[]
                 else:
                     SentenceWords.append([(w,1)]) 
@@ -123,6 +136,7 @@ def getSemanticsForSentence(sen , keyword):
         sem.append(r)
     
     return sem
+    
 
 def paraphrasingKeywords(keywordList):
     languages=["ko","ja","es","ar","it","ga" ,"fr","de" ,"cs","bg","hr","el","pt","no","ru","ro",
@@ -149,12 +163,19 @@ def paraphrasingKeywords(keywordList):
     return finalRes
     
 #input format -> ["coronavirus" , "pagerank implementation"] , text
-
-def getSemanticForAllKeyWords(keywordsList ,text):
-    #
-    #....
-    #
-    return [["covid-19", "COV19" , "Sars"] , ["pagerank executation" , "pagerank effectuation"]]
+def getSemanticForAllKeyWords(keywordsList , text):
+    allSemantics=[]
+    paraphrases=paraphrasingKeywords(keywordsList)
+    i=0
+    for word in keywordsList:
+        matches=matchSentence(word , text)
+        sen=matches[0]
+        keywordSematics=getSemanticsForSentence(sen , word)
+        allSemantics.append(keywordSematics+paraphrases[i])
+        i+=1
+        
+    
+    return allSemantics
     
     
 
