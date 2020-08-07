@@ -1,3 +1,4 @@
+import re
 def removeDuplicate(Input):
     seen = set() 
     Output = [(a, b) for a, b in Input 
@@ -36,3 +37,8 @@ def getPos(sentence , wordIndex):
     else:
         mapp=None
     return mapp
+
+
+def matchSentence(query , text):
+    matches=re.findall(r'(?:[^ ]+ ){0,10}'+query+'(?: [^ ]+){0,10}',text)
+    return matches
