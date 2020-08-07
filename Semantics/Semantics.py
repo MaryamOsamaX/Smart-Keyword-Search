@@ -9,7 +9,7 @@ import itertools
 #from wordNet
 def getSynonymsAndRelatedKeyword(synset,oneWord ,  lch_threshold=2.26):
     res=[]
-    print(synset)
+    #print(synset)
     if (oneWord== True):
         for net in wn.all_synsets():
             try:
@@ -23,8 +23,9 @@ def getSynonymsAndRelatedKeyword(synset,oneWord ,  lch_threshold=2.26):
             except:
                     continue
     else:
-        for l in synset.lemmas(): 
-            res.append((l.name(),1)) 
+        if synset:
+            for l in synset.lemmas():
+                res.append((l.name(),1))
 
     return res
 
@@ -87,8 +88,8 @@ def getSemanticsForSentence(sen , keyword):
                 i+=1
             else:
                 pos=getPos(sen , i)
-                print(w)
-                print(pos)
+                # print(w)
+                # print(pos)
                 if (pos != None):
                     if(len(wn.synsets(w))!=0):
                         #print(wn.synsets(w))
@@ -169,9 +170,10 @@ def getSemanticForAllKeyWords(keywordsList , text):
     i=0
     for word in keywordsList:
         matches=matchSentence(word , text)
-        sen=matches[0]
-        keywordSematics=getSemanticsForSentence(sen , word)
-        allSemantics.append(keywordSematics+paraphrases[i])
+        if matches:
+            sen=matches[0]
+            keywordSematics=getSemanticsForSentence(sen , word)
+            allSemantics.append(keywordSematics+paraphrases[i])
         i+=1
         
     

@@ -7,15 +7,20 @@ from Keywords import PageKeywords
 from Semantics.Semantics import getSemanticForAllKeyWords
 from Competitor_Main import get_comps_keywords
 from BingAds.data import *
+import time
 
 
 def getKeywords_Original_Semantics(article, keywords1):
     keywords = []  # list of dic
     # keywords['text'] = []
     # keywords['source'] = []
+    s = time.time()
     articleKeywords = clearKeywords(PageKeywords.get_PageKewords(article, keywords1))
+    print('fin original  ', time.time() - s)
+    s = time.time()
     SemanticsKeywords = getSemanticForAllKeyWords(articleKeywords, article)
-    #SemanticsKeywords = []
+    print('fin semantics  ', time.time() - s)
+    # SemanticsKeywords = []
     for k in articleKeywords:
         keyword = {}
         keyword['text'] = k
@@ -37,8 +42,9 @@ def getKeywords_Original_Semantics(article, keywords1):
 def smap(f):
     return f()
 
+
 def clearKeywords(pageKeywords):
-    for i,item in enumerate(pageKeywords):
+    for i, item in enumerate(pageKeywords):
         regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
         url = re.findall(regex, item)
         if url:
@@ -47,12 +53,13 @@ def clearKeywords(pageKeywords):
         if item.isnumeric():
             pageKeywords.remove(item)
             continue
-            #print('remove ', item)
+            # print('remove ', item)
         pageKeywords[i] = re.sub(r'[^\w\s-]', '', pageKeywords[i])
         pageKeywords[i] = pageKeywords[i].lower()
 
-        #print(pageKeywords[i])
+        # print(pageKeywords[i])
     return pageKeywords
+
 
 def searchForKeywords(url):
     title, article, keywords1 = ScrapArticle.scrap(url)
@@ -66,10 +73,15 @@ def searchForKeywords(url):
     # keywords = res[0]
     # comps_keywords = res[1]
     # suggested_keywords = res[2]
+    s = time.time()
     keywords = getKeywords_Original_Semantics(article, keywords1)
-
+    print('fin o & s  ', time.time() - s)
+    s = time.time()
     comps_keywords = clearKeywords(get_comps_keywords(url, title))
+    print('fin comp  ', time.time() - s)
+    s = time.time()
     suggested_keywords = clearKeywords(getKeywordsByURL(url, 10))
+    print('fin suggested  ', time.time() - s)
     for k in comps_keywords:
         if k not in keywords:
             keyword = {}
@@ -86,13 +98,35 @@ def searchForKeywords(url):
     return keywords, article  # List of dic {'text','source'}
 
 
+def get_keywords_data_50(keywords_text, url):
+    keywordsWithData = []
+    j = 50
+    i = 0
+    for x in range(len(keywords_text)):
+        if j >= len(keywords_text):
+            # print(i,' ',j,'  end  ',keywords_text[i:])
+            keywordsWithData.extend(getKeywordData(keywords_text[i:], url))
+            break
+        else:
+            # print(i,' ',j,'  ',keywords_text[i:j])
+            keywordsWithData.extend(getKeywordData(keywords_text[i:j], url))
+            i += 50
+            j += 50
+
+    return keywordsWithData
+
+
 def findKeywords(url):
+    s = time.time()
     keywords, article = searchForKeywords(url)
-    keywords_text = [sub['text'] for sub in keywords]
-    #keywords_text.extend(['novo', 'matrix'])
-    keywordsWithData = getKeywordData(keywords_text, url)
-    kd_text = [sub['text'] for sub in keywordsWithData]
-    relevance = calcRelevance(article, keywords_text)
+    print('fin get keywords ', time.time() - s)
+    print('total words = ', len(keywords))
+    s = time.time()
+    keywords_text = clearKeywords([str(sub['text']) for sub in keywords])
+    # keywords_text.extend(['novo', 'matrix'])
+    keywordsWithData = get_keywords_data_50(keywords_text, url)
+    kd_text =clearKeywords( [str(sub['text']) for sub in keywordsWithData])
+    relevance = calcRelevance(article, kd_text)
     # print('keywords_text ',len(keywords_text))
     # print(keywords_text)
     # print('kd_text', len(kd_text))
@@ -100,19 +134,36 @@ def findKeywords(url):
     # print('all data ',len(keywordsWithData))
     # for i in keywordsWithData:
     #     print(i)
-    for i in range(len(keywords_text)):
-        if keywords_text[i] in kd_text:
-            j = kd_text.index(keywords_text[i])
-            keywordsWithData[j]['source'] = keywords[i]['source']
-            keywordsWithData[j]['relevance'] = relevance[i]
+    print('keywords_text', len(keywords_text))
+    print('kd_text', len(kd_text))
+    for i in range(len(kd_text)):
+        if kd_text[i] in keywords_text:
+            j = keywords_text.index(kd_text[i])
+            keywordsWithData[i]['source'] = keywords[j]['source']
+            keywordsWithData[i]['relevance'] = relevance[i]
+    # for i in range(len(keywords_text)):
+    #     if keywords_text[i] in kd_text:
+    #         print(keywords_text[i],' ',keywords[i]['source'],relevance[i])
+    #         j = kd_text.index(keywords_text[i])
+    #         keywordsWithData[j]['source'] = keywords[i]['source']
+    #         keywordsWithData[j]['relevance'] = relevance[i]
+
+    print('fin data  ', time.time() - s)
     return keywordsWithData
 
 
 if __name__ == '__main__':
-    url='https://www.autoexpress.co.uk/best-cars/103133/best-new-cars-for-2020'
-    ks =findKeywords(url)
+    url = 'https://www.autoexpress.co.uk/best-cars/103133/best-new-cars-for-2020'
+    ss = time.time()
+    ks = findKeywords(url)
+    print('fin total  ', time.time() - ss)
+    print('total final words = ', len(ks))
     for k in ks:
-        print(k['text'],' ',k['source'])
+        print(k['text'], ' ', k['source'])
+    # k=[]
+    # for i in range(31):
+    #     k.append('k'+str(i))
+    # get_keywords_data_50(k,'')
 #     url = 'https://towardsdatascience.com/textrank-for-keyword-extraction-by-python-c0bae21bcec0'
 #     keywords, article = searchForKeywords(url)
 #     keywords_text = [sub['text'] for sub in keywords]
