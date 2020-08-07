@@ -3,6 +3,7 @@ from Semantics.Functions import *
 from nltk.corpus import wordnet as wn
 from googletrans import Translator
 import requests 
+import json
 import itertools
         
 #from wordNet
@@ -51,6 +52,26 @@ def getWordsByConceptNet(imbg_word ,oneWord ,pos):
             break
 
     return sort(removeDuplicate(words))
+    
+    
+def getSynonymsMerriamWebster(word , pos):
+    api_token = '6a21f8ce-b84a-4fdd-a4fa-0b94a0a1f78d'
+    api_url_base = 'https://www.dictionaryapi.com/api/v3/references/ithesaurus/json/'+word+'?key='+api_token
+
+    headers = {
+        'Content-Type': "application/x-www-form-urlencoded",
+        'cache-control': "no-cache"
+        }
+    response = requests.request("POST", api_url_base,headers=headers)
+    data = response.json()
+    syns=[]
+    if(isinstance(data[0] , dict)):
+        for d in data:
+            if(d['fl']==pos):
+                for m in d['meta']['syns']:
+                    for w in m:
+                        syns.append(w)
+    return syns
     
     
 def getSemanticsForSentence(sen , keyword):
