@@ -305,6 +305,7 @@ def getKeywordData(keywords, url):
         k['ctr'] = 0.0
         k['impressions'] = 0.0
         k['totalCost'] = 0.0
+        k['rate'] = 0.0
         k['source'] = ''
         keywords_data.append(k)
         index = (keyword_idea.AdGroupId * -1) - seed_offset if keyword_idea.AdGroupId is not None else 0
@@ -380,7 +381,6 @@ def getKeywordData(keywords, url):
         keywords_data[i]['totalCost'] = round((exist(estimates[i].Maximum.TotalCost, estimates[i].Maximum.TotalCost)
                                                + exist(estimates[i].Minimum.TotalCost, estimates[i].Minimum.TotalCost)) / 2,
                                               2)
-
     return keywords_data
 
 
