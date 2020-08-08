@@ -239,7 +239,10 @@ def getWebPageReach(url):
     soup = BeautifulSoup(r.text, 'xml')
     # views = soup.find('PageViews')
     # print(views.find('PerMillion').text)
-    return int(soup.find('Reach').text)
+    if soup.find('Reach'):
+        return int(soup.find('Reach').text)
+    else:
+        return -1
 
 
 if __name__ == '__main__':
