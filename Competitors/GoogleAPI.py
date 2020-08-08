@@ -42,8 +42,8 @@ def getURLs(url, title):
     number_of_titled = 3
     number_of_sites = 1
     '''  
-    number_of_related = 1
-    number_of_titled = 1
+    number_of_related = 2
+    number_of_titled = 3
     number_of_sites = 1
     final_results = []
     sites = []
@@ -77,5 +77,5 @@ def getURLs(url, title):
             if(len(final_results) >= 50):
                 break
     
-    
+    final_results.remove(url)
     return final_results
