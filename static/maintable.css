@@ -105,12 +105,7 @@ iframe {
 .container-table100 {
   width: 100%;
   min-height: 100vh;
-  background: #c850c0;
-  background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
-  background: -o-linear-gradient(45deg, #4158d0, #c850c0);
-  background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
-  background: linear-gradient(45deg, #4158d0, #c850c0);
-
+  background: #;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -123,7 +118,7 @@ iframe {
 }
 
 .wrap-table100 {
-  width: 1170px;
+  width: 20000px;
 }
 
 table {
@@ -131,9 +126,8 @@ table {
   border-collapse: collapse;
   background: white;
   border-radius: 10px;
-  overflow: hidden;
+
   width: 100%;
-  margin: 0 auto;
   position: relative;
 }
 table * {
@@ -148,15 +142,16 @@ table thead tr {
 }
 table tbody tr {
   height: 50px;
+    border :1px solid blue;
 }
 table tbody tr:last-child {
-  border: 0;
+ border :1px solid blue;
 }
 table td, table th {
-  text-align: left;
+  text-align: center;
 }
 table td.l, table th.l {
-  text-align: right;
+  text-align: center;
 }
 table td.c, table th.c {
   text-align: center;
@@ -168,14 +163,16 @@ table td.r, table th.r {
 
 .table100-head th{
   font-family: OpenSans-Regular;
-  font-size: 18px;
-  color: #fff;
+  font-size: 15px;
+  color: #ffffff;
   line-height: 1.2;
   font-weight: unset;
+  border :1px solid blue;
 }
 
 tbody tr:nth-child(even) {
   background-color: #f5f5f5;
+    border :1px solid blue;
 }
 
 tbody tr {
@@ -184,43 +181,49 @@ tbody tr {
   color: #808080;
   line-height: 1.2;
   font-weight: unset;
+   border :1px solid blue;
 }
 
 tbody tr:hover {
   color: #555555;
   background-color: #f5f5f5;
   cursor: pointer;
-}
-
-.column2 {
-  width: 260px;
-  font-weight: 600;
+   border :1px solid blue;
 }
 
 .column1 {
-  width: 20px;
+  width: 260px;
   padding-left: 40px;
+   border :1px solid blue;
+}
+
+.column2 {
+  width: 170px;
+   border :1px solid black;
 }
 
 .column3 {
-  width: 200px;
-  text-align: center;
+   width: 170px;
+   border :1px solid blue;
 }
 
 .column4 {
-  width: 100px;
+   width: 170px;
   text-align: center;
+   border :1px solid blue;
 }
 
 .column5 {
-  width: 100px;
+  width: 170px;
   text-align: center;
+   border :1px solid blue;
 }
 
-.column6 {
-  width: 100px;
+.column6 ,.colume7,.colume8,.colume9,.colume10,.colume11,.colume12,.colume13{
+   width: 170px;
   text-align: center;
-  padding-right: 60px;
+
+   border :1px solid blue;
 }
 
 
@@ -237,10 +240,13 @@ tbody tr:hover {
   table tbody tr {
     height: auto;
     padding: 37px 0;
+       border :1px solid blue;
+
   }
   table tbody tr td {
     padding-left: 40% !important;
     margin-bottom: 24px;
+       border :1px solid blue;
   }
   table tbody tr td:last-child {
     margin-bottom: 0;
@@ -278,7 +284,7 @@ tbody tr:hover {
   .column4,
   .column5,
   .column6 {
-    text-align: center;
+    text-align: left;
   }
 
   .column4,

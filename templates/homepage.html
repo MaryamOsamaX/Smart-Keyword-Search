@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+
+    <!-- Title Page-->
+    <title>Keywords</title>
+    <!-- Main CSS-->
+
+    <link rel="stylesheet" href="{{url_for('static',filename='mainn.css')}}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{url_for('static',filename='skel.css')}}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{url_for('static',filename='style-xlarge.css')}}" type="text/css" media="all" />
+</head>
+
+<body class="landing">
+  	<header id="header">
+				<h1><a href="index.html">KEYWORD RESEARCH</a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="homepage.php">Home</a></li>
+					</ul>
+				</nav>
+			</header>
+    <div class="page-wrapper bg-img-1 p-t-165 p-b-100">
+
+        <div class="wrapper wrapper--w720">
+         <header class="major">
+			<h3>KEYWORD RESEARCH</h3>
+		</header>
+
+            <div class="card card-3">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <form method="POST">
+                                <div class="input-group">
+                                    <input class="input--style-1" type="text" name="URL" id='URL' placeholder="Enter your URL" required="required">
+
+                                </div>
+
+                                <button class="btn-submit" type="submit" formaction="/keywords.html">search for keywords</button>
+                                <button class="btn-submit" type="submit" formaction="/competitors.html">search for competitors</button>
+                            </form>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+</body>
+
+</html>

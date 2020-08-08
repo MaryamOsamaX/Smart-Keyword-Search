@@ -1,46 +1,194 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Keywords</title>
-    <link href="{{url_for('static',filename='key0.css')}}" rel="stylesheet" type="text/css" media="all">
-</head>
-<body>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <div class="limiter">
-		<div class="container-table100">
-			<div class="wrap-table100">
-				<div class="table100">
-					<table>
-						<thead>
-							<tr class="table100-head">
-                                <th class="column1">No.</th>
-								<th class="column2">Keywords</th>
-								<th class="column3">From</th>
-								<th class="column4">Volume</th>
-								<th class="column5">CPC</th>
-								<th class="column6">Competition</th>
-							</tr>
-						</thead>
-						<tbody>
-                            {% if result %}
-                                {% for item in result %}
-								<tr>
-                                    <td class="column1">{{ loop.index0 }}</td>
-									<td class="column2">{{ item }}</td>
-									<td class="column3" style="color:#1e90ff;">original page</td>
-									<td class="column4">0</td>
-									<td class="column5">0</td>
-									<td class="column6">0</td>
-								</tr>
-                                {% endfor %}
-                            {% endif %}
-                        </tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{url_for('static',filename='util.css')}}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{url_for('static',filename='maint.css')}}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{url_for('static',filename='mainn.css')}}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{url_for('static',filename='maintable.css')}}" type="text/css" media="all" />
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #C0C0C0;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+
+<body class="w3-light-grey" class="landing">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-center">KEYWORD RESEARCH</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="/images/W_in_circle.png" class="w3-circle w3-margin-right" style="width:50px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+
+      <span>KEYWORD RESEARCH</span><br>
+    </div>
+  </div>
+  <hr>
+
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+     <a href="home.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-user"></i>Home</a>
+   <a href="competitors.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users"></i>competitors</a>
+
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+
+  </header>
+
+  <div class="w3-row-padding w3-margin-bottom">
+
+
+
+<form class="example" action="/keywords.html" style="margin:auto;max-width:700px">
+  <input type="text" placeholder="Enter your URL (search for keywords)" name="search2">
+  <button type="submit"><i class="fa fa-search"></i></button>
+
+</form>
+
+<div class="container-table100">
+      <div class="wrap-table100">
+             <div class="w3-bar">
+  <button class="w3-button w3-blue">Download CSV</button> <br> <br>
+</div>
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head w3-blue" >
+                <th class="column2">Keywords</th>
+                <th class="column2">Volume</th>
+                <th class="column2">avgVolume</th>
+                <th class="column2">clicks</th>
+                <th class="column2">avgCpc</th>
+                <th class="column2">competition</th>
+                <th class="column2">relevance</th>
+                <th class="column2">Suggested_Bid</th>
+                <th class="column2">avg_Position</th>
+                <th class="column2">ctr</th>
+                <th class="column2">impressions</th>
+                <th class="column2">total_cost</th>
+                <th class="column2">source</th>
+              </tr>
+            </thead>
+            <tbody>
+			 {% if result %}
+			        {% for item in result %}
+                    <tr>
+							  <td class="column2">0</td>
+                 			  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+							  <td class="column2">0</td>
+                    </tr>
+			        { % endfor %}
+			 {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- End page content -->
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
 
 </body>
-
 </html>
