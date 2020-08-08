@@ -135,19 +135,19 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 			 {% if result %}
 			        {% for item in result %}
                     <tr>
-							  <td class="column2">0</td>
-                 			  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
-							  <td class="column2">0</td>
+							  <td class="column2">{{item.text}}</td>
+                 			  <td class="column2">{{item.volume}}</td>
+							  <td class="column2">{{item.avgVolume}}</td>
+							  <td class="column2">{{item.clicks}}</td>
+							  <td class="column2">{{item.avgCpc}}</td>
+							  <td class="column2">{{item.competition}}</td>
+							  <td class="column2">{{item.relevance}}</td>
+							  <td class="column2">{{item.suggestedBid}}</td>
+							  <td class="column2">{{item.avgPosition}}</td>
+							  <td class="column2">{{item.ctr}}</td>
+							  <td class="column2">{{item.impressions}}</td>
+							  <td class="column2">{{item.totalCost}}</td>
+							  <td class="column2">{{item.source}}</td>
                     </tr>
 			        { % endfor %}
 			 {% endif %}
