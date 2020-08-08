@@ -9,7 +9,8 @@ from BingAds.data import getKeywordsByURL
 from Competitors.Competitor import Competitor
 from Competitors.CompTraffic import getWebPageReach
 from Similarity import getSimilarity
-
+from ScrapArticle import *
+import sys
 
 def get_all_comps(url, title):
     '''
@@ -91,14 +92,32 @@ def get_comps(url, title, article): #Should we add title???
     for comp in competitors:
         comp.similarity = getSimilarity(article, comp.url)
 
-    return competitors
+    comps = []
+    for comp in competitors:
+        c = {}
+        c['url'] = comp.url
+        c['reach'] = comp.traffic_reach
+        c['similarity'] = comp.similarity
+        comps.append(c)
+
+    return comps
 
 
 if __name__ == '__main__':
-    #########################################################
-    url = "https://blog.hubspot.com/marketing/what-is-digital-marketing"
-    title = "what is digital marketing"
-    #########################################################
-
-    # get related comps
-    results = get_all_comps(url, title)
+    # #########################################################
+    # url = "https://blog.hubspot.com/marketing/what-is-digital-marketing"
+    # title = "what is digital marketing"
+    # #########################################################
+    #
+    # # get related comps
+    # results = get_all_comps(url, title)
+    url = 'https://www.autoexpress.co.uk/best-cars/103133/best-new-cars-for-2020'
+    title, article, k_1 = scrap(url)
+    competitors = get_comps(url, title, article)
+    print('len = ',len(competitors))
+    print(competitors)
+    original_stdout = sys.stdout
+    with open('competitors.txt', 'w') as f:
+        sys.stdout = f  # Change the standard output to the file we created.
+        print(competitors)
+        sys.stdout = original_stdout
