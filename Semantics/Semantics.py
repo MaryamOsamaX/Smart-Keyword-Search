@@ -166,7 +166,12 @@ def paraphrasingKeywords(keywordList):
 #input format -> ["coronavirus" , "pagerank implementation"] , text
 def getSemanticForAllKeyWords(keywordsList , text):
     allSemantics=[]
-    paraphrases=paraphrasingKeywords(keywordsList)
+    A= keywordsList[:len(keywordsList)//2]
+    B = keywordsList[len(keywordsList)//2:]
+    paraphrases=[]
+    A=paraphrasingKeywords(A)
+    B=paraphrasingKeywords(B)
+    paraphrases=A+B
     i=0
     for word in keywordsList:
         matches=matchSentence(word , text)
