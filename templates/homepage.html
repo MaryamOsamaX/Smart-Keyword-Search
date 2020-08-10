@@ -4,23 +4,37 @@
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
-
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
     <!-- Title Page-->
     <title>Keywords</title>
-    <!-- Main CSS-->
 
+    <!-- Main CSS-->
     <link rel="stylesheet" href="{{url_for('static',filename='mainn.css')}}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{url_for('static',filename='skel.css')}}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{url_for('static',filename='style-xlarge.css')}}" type="text/css" media="all" />
+<script type="text/javascript">
+    function validate() {
+        var url = document.getElementById("URL").value;
+        var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+        if (pattern.test(url)) {
+            return true;
+        }
+            alert("Url is not valid!");
+            return false;
+
+    }
+</script>
 </head>
 
 <body class="landing">
   	<header id="header">
-				<h1><a href="index.html">KEYWORD RESEARCH</a></h1>
+				<h1><a href="http://127.0.0.1:5000/">KEYWORD RESEARCH</a></h1>
 				<nav id="nav">
 					<ul>
-						<li><a href="homepage.php">Home</a></li>
+						<li><a href="\homepage.html">Home</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -35,14 +49,14 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab1">
-                            <form method="POST">
+                            <form method="POST" >
                                 <div class="input-group">
                                     <input class="input--style-1" type="text" name="URL" id='URL' placeholder="Enter your URL" required="required">
 
                                 </div>
 
-                                <button class="btn-submit" type="submit" formaction="/keywords.html">search for keywords</button>
-                                <button class="btn-submit" type="submit" formaction="/competitors.html">search for competitors</button>
+                                <button class="btn-submit" type="submit" formaction="/keywords.html" onclick=" return validate();">search for keywords</button>
+                                <button class="btn-submit" type="submit" formaction="/competitors.html" onclick=" return validate();">search for competitors</button>
                             </form>
                         </div>
                         </div>

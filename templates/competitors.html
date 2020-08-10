@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>KEYWORDS RESEARCH</title>
+<title>Competitors</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -16,14 +15,10 @@
 <link rel="stylesheet" href="{{url_for('static',filename='mainn.css')}}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{url_for('static',filename='maintable.css')}}" type="text/css" media="all" />
 
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 <style>
-    .toolbar {
-    float: left;
-}
 .loader {
     position: fixed;
     z-index: 99;
@@ -38,7 +33,7 @@
 }
 
 .loader > img {
-    width: 600px;
+    width: 100px;
 }
 
 .loader.hidden {
@@ -93,17 +88,6 @@ form.example::after {
   clear: both;
   display: table;
 }
-.arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-}
-.up {
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
-}
-
 </style>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
@@ -119,17 +103,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             return false;
 
     }
-window.addEventListener("load", function () {
-    const loader = document.querySelector(".loader");
-    loader.className += " hidden"; // class "loader hidden"
-});
 </script>
-
 <body class="w3-light-grey" class="landing">
 <div class="loader">
-    <img src="/static/drawinsights.gif" alt="Loading..." /><br><br><br><br><br><br>
+    <img src="/static/drawinsights.gif" alt="Loading..." />
+    <figcaption> it may take 10-20 minutes ^_^ </figcaption>
 </div>
-
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
@@ -152,7 +131,7 @@ window.addEventListener("load", function () {
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
      <a href="\homepage.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-user"></i>Home</a>
-   <a href="\competitors.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users"></i>competitors</a>
+   <a href="\keywords.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users"></i>Analysis</a>
 
   </div>
 </nav>
@@ -166,7 +145,7 @@ window.addEventListener("load", function () {
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-
+    
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
@@ -174,31 +153,24 @@ window.addEventListener("load", function () {
 
 
 <form class="example" action="/keywords.html" style="margin:auto;max-width:700px">
-  <input type="text" placeholder="Enter your URL (search for keywords)" name="URL" id='URL'>
-  <button type="submit" formaction="/keywords.html" onclick="return validate();"><i class="fa fa-search"></i></button>
+  <input type="text" placeholder="Enter your URL (search for keywords)" name="URL" id="URL">
+  <button type="submit" formaction="/competitors.html" onclick="return validate();"><i class="fa fa-search"></i></button>
 
 </form>
 
 <div class="container-table100">
       <div class="wrap-table100">
              <div class="w3-bar">
-  <button class="w3-button w3-blue exportToExcel"  onclick="exportTableToExcel('table')">Download CSV</button> <br> <br>
+ <button class="w3-button w3-blue exportToExcel"  onclick="exportTableToExcel('table')">Download CSV</button> <br> <br>
 </div>
         <div class="table100">
-          <table id="table" class="table2excel" data-tableName="Test Table 1">
+          <table id="table">
             <thead>
-              <tr class="table100-head w3-blue noExl" >
-                  <th class="colum2" ><span title="">Keywords</span></th>
-                  <th class="column2" onclick="sortTable(1)" style="cursor:crosshair"><span title="the measure of how difficult it will be to rank for a particular keyword">competition</span></th>
-
-                  <th class="column2"  ><span title="number of searches for a particular keyword in the last month">volume</span></th>
-                  <th class="column2" ><span title="average number of searches for a particular keyword in the last months">avgVolume </span></th>
-                  <th class="column2"><span title=" is how relevant, or important, certain keywords or phrases are to your article">relevance</span></th>
-                  <th class="column2"><span title="Cost-per-click is the amount you pay for each click on your ads">avgCpc</span></th>
-                  <th class="column2" ><span title="counts of clicks that obtained through click the ad from this keyword">clicks</span></th>
-                  <th class="column2" ><span title="click-through rate is the rate at which your PPC ads are clicked">ctr</span></th>
-                  <th class="column2" ><span title="number of times your ad is shown on a search result page or other sites">impressions</span></th>
-                  <th class="column2" ><span title="is the source of where keyword are generated">source</span></th>
+              <tr class="table100-head w3-blue" >
+                <th class="column2">URL</th>
+                <th class="column2" ><span title="Number of people who have Alexa Tool bar extension who opened this URL per million">Reach</span></th>
+                <th class="column2" ><span title="rate of how similar this Competitor to your original page">Similary</span></th>
+            
               </tr>
             </thead>
             <tbody>
@@ -206,16 +178,14 @@ window.addEventListener("load", function () {
                     {% set sort_on = request.args.sort_on|default('volume') %}
                     {% for item in result|sort(attribute=sort_on) %}
                               <tr class="noExl">
-						      <td class="column2">{{item.text}}</td>
-                              <td class="column2">{{item.competition}}</td>
-                 			  <td class="column2">{{item.volume}}</td>
-							  <td class="column2">{{item.avgVolume}}</td>
-                                  <td class="column2">{{item.relevance}}</td>
-                                  <td class="column2">{{item.avgCpc}}</td>
-							  <td class="column2">{{item.clicks}}</td>
-							  <td class="column2">{{item.ctr}}</td>
-							  <td class="column2">{{item.impressions}}</td>
-							  <td class="column2">{{item.source}}</td>
+                                  <td class="column2"><a href={{ item.url}}>{{item.url}}</a></td>
+                                  {% if item.reach == -1 %}
+                                      <td class="column2">_</td>
+                                  {% else %}
+                                  <td class="column2">{{item.reach}}</td>
+                                  {% endif %}
+                                    {% set similarity = item.similarity * 100 %}
+                                  <td class="column2">{{ '%0.1f' % similarity|float}}%</td>
                               </tr>
 			        {% endfor %}
 			 {% endif %}
@@ -265,7 +235,7 @@ function exportTableToExcel(tableID, filename = ''){
     var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
     // Specify file name
-    filename = filename?filename+'.xls':'Keywords.xls';
+    filename = filename?filename+'.xls':'Competitors.xls';
 
     // Create download link element
     downloadLink = document.createElement("a");
@@ -295,7 +265,10 @@ $(document).ready(function() {
 
     $("div.toolbar").html();
 } );
-
+window.addEventListener("load", function () {
+    const loader = document.querySelector(".loader");
+    loader.className += " hidden"; // class "loader hidden"
+});
 </script>
 
 </body>
