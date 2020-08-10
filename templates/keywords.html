@@ -21,6 +21,17 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 <style>
+
+    .low {
+    color: blue;
+}
+    .high {
+    color: red;
+}
+    .mid {
+    color: yellow;
+}
+
     .toolbar {
     float: left;
 }
@@ -206,15 +217,52 @@ window.addEventListener("load", function () {
                     {% set sort_on = request.args.sort_on|default('volume') %}
                     {% for item in result|sort(attribute=sort_on) %}
                               <tr class="noExl">
-						      <td class="column2">{{item.text}}</td>
-                              <td class="column2">{{item.competition}}</td>
-                 			  <td class="column2">{{item.volume}}</td>
-							  <td class="column2">{{item.avgVolume}}</td>
+						          <td class="column2">{{item.text}}</td>
+                                    {% if item.competition=="High" %}
+                                         <td class="column2 high">{{item.competition}}</td>
+
+                                     {% elif item.competition=="Low" %}
+                                         <td class="column2 low">{{item.competition}}</td>
+                                     {% else %}
+                                        <td class="column2 mid">{{item.competition}}</td>
+                                    {% endif %}
+
+                                  {% if item.volume==-1 %}
+                                    <td class="column2">_</td>
+                                  {% else %}
+                 			          <td class="column2">{{item.volume}}</td>
+                                  {% endif %}
+                                  {% if item.avgVolume==-1 %}
+                                     <td class="column2">_</td>
+                                  {% else %}
+							         <td class="column2">{{item.avgVolume}}</td>
+                                  {% endif %}
+                                    {% if item.relevance==-1 %}
+                              <td class="column2">_</td>
+                              {% else %}
                                   <td class="column2">{{item.relevance}}</td>
+                              {% endif %}
+                                {% if item.avgCpc==-1 %}
+                              <td class="column2">_</td>
+                              {% else %}
                                   <td class="column2">{{item.avgCpc}}</td>
-							  <td class="column2">{{item.clicks}}</td>
-							  <td class="column2">{{item.ctr}}</td>
-							  <td class="column2">{{item.impressions}}</td>
+                              {% endif %}
+                                {% if item.clicks==-1 %}
+                              <td class="column2">_</td>
+                              {% else %}
+                                  <td class="column2">{{item.clicks}}</td>
+                              {% endif %}
+                                {% if item.ctr==-1 %}
+                              <td class="column2">_</td>
+                              {% else %}
+                                  <td class="column2">{{item.ctr}}</td>
+                              {% endif %}
+                                {% if item.impressions==-1 %}
+                              <td class="column2">_</td>
+                              {% else %}
+                                  <td class="column2">{{item.impressions}}</td>
+                              {% endif %}
+
 							  <td class="column2">{{item.source}}</td>
                               </tr>
 			        {% endfor %}
