@@ -175,8 +175,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             </thead>
             <tbody>
 			 {% if result %}
-                    {% set sort_on = request.args.sort_on|default('volume') %}
-                    {% for item in result|sort(attribute=sort_on) %}
+                    {% for item in result %}
                               <tr class="noExl">
                                   <td class="column2"><a href={{ item.url}}>{{item.url}}</a></td>
                                   {% if item.reach == -1 %}

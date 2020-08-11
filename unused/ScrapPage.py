@@ -2,12 +2,13 @@ from selenium import webdriver
 from urllib.request import urlopen
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup, Comment
+import chromedriver_binary
 import codecs
 import re
 
 def scrap_Page(url):
     #sroll down page part : start
-    driver = webdriver.Chrome(executable_path='content/chromedriver')
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
     try:
         iframe = driver.find_element_by_id("nvpush_popup_background_iframe")
@@ -67,7 +68,7 @@ def scrap_Page(url):
         article = article.replace('  ', ' ')
 
     #print(article)
-    return article
+    return soup.find('title').text,article,[]
         # print(article)
         # f = codecs.open("demo.txt", "w", "utf-8")
         # f.write(article)
@@ -111,4 +112,4 @@ def scrap_Page(url):
 
 
 if __name__ == '__main__':
-    scrap_Page('https://towardsdatascience.com/textrank-for-keyword-extraction-by-python-c0bae21bcec0')
+    print(scrap_Page('https://www.autoexpress.co.uk/best-cars/103133/best-new-cars-for-2020'))

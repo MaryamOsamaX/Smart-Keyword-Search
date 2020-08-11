@@ -71,8 +71,12 @@ def get_comp_keywords(url):#till finish all
 def get_comps_keywords(url, title):  # till finish all
     urls = getURLs(url, title)
     keywords = []
-    for i in range(10):
-        keywords.extend(getKeywordsByURL(urls[i]))
+    if len(urls) >= 10:
+        for i in range(10):
+            keywords.extend(getKeywordsByURL(urls[i]))
+    else:
+        for i in range(len(urls)):
+            keywords.extend(getKeywordsByURL(urls[i]))
     return keywords
 
 

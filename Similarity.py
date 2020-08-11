@@ -11,7 +11,9 @@ from rouge import Rouge
 
 def getSimilarity(txt_1, url_2):
     #title_1, txt_1, keywords_1 = scrap(url_1)
+
     title_2, txt_2, keywords_2 = scrap(url_2)
+
     rouge = Rouge()
     scores = rouge.get_scores(txt_1, txt_2)
 

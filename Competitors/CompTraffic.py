@@ -40,7 +40,7 @@ def refresh_credentials(user):
     client_idp = boto3.client('cognito-idp', region_name=cognito_region, aws_access_key_id='', aws_secret_access_key='')
     client_identity = boto3.client('cognito-identity', region_name='us-east-1')
 
-    password = 'PUT_PASSWORD_HERE'
+    password = 'Kiddo1412'
     # print(user)
     # print(password)
     response = client_idp.initiate_auth(
@@ -108,8 +108,8 @@ def sortQueryString(queryString):
 
 def getWebPageReach(url):
     opts = {}
-    opts['key'] = "PUT_KEY_HERE"
-    opts['user'] = "PUT_USER_HERE"
+    opts['key'] = "8hLh29Md5h6tcaM5E16Je1t0evGVhHmz71nGs7Vw"
+    opts['user'] = "ysamir1998@gmail.com"
     opts['action'] = "TrafficHistory"
     opts['options'] = "&Range=1&ResponseGroup=History&Url=" + url
 
@@ -239,12 +239,15 @@ def getWebPageReach(url):
     soup = BeautifulSoup(r.text, 'xml')
     # views = soup.find('PageViews')
     # print(views.find('PerMillion').text)
+   # print(soup.find('Reach').text)
     if soup.find('Reach'):
-        return int(soup.find('Reach').text)
+        s=(soup.find('Reach').text).split('\n')
+        return int(round(float(s[1])))
+
     else:
         return -1
 
 
 if __name__ == '__main__':
-    url = input('Enter URL: ')
+    url = 'https://www.edureka.co/blog/top-10-trending-technologies/'
     print('Reach = ', getWebPageReach(url))
