@@ -161,7 +161,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <div class="container-table100">
       <div class="wrap-table100">
              <div class="w3-bar">
- <button class="w3-button w3-blue exportToExcel"  onclick="exportTableToExcel('table')">Download CSV</button> <br> <br>
+ <button class="w3-button w3-blue exportToExcel"  onclick="exportToCsv({{ result }})">Download CSV</button> <br> <br>
 </div>
         <div class="table100">
           <table id="table">
@@ -257,6 +257,36 @@ function exportTableToExcel(tableID, filename = ''){
         downloadLink.click();
     }
 }
+
+function exportToCsv(result) {
+    var downloadLink;
+    downloadLink = document.createElement("a");
+    filename='competitors.csv'
+    document.body.appendChild(downloadLink);
+    var csv = result.map(function(d){
+        return JSON.stringify(Object.values(d));
+})
+.join('\n')
+.replace(/(^\[)|(\]$)/mg, '');
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: "data:text/csv;charset=utf-8,"
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + "data:text/csv;charset=utf-8,"+
+            'URL                              , Reach    , Similarity(0-1)   , \n'+ csv;
+
+        // Setting the file name
+        downloadLink.download = filename;
+
+        //triggering the function
+        downloadLink.click();
+    }
+
+}
+
 $(document).ready(function() {
     $('#table').DataTable( {
         "dom": '<"toolbar">frtip'

@@ -31,10 +31,10 @@ def findCompetitors():
     if request.method == 'POST':
         result = request.form
         url = result['URL']
-        title, article, k_1 = scrap(url)
-        competitors = Competitor_Main.get_comps(url, title, article)
-        print(url)
-        print(competitors)
+        # title, article, k_1 = scrap(url)
+        # competitors = Competitor_Main.get_comps(url, title, article)
+        competitors=[{'url': 'https://www.autoexpress.co.uk/best-cars/103133/best-new-cars-for-2020', 'reach': 60, 'similarity': 0.999}, {'url': 'https://www.garo.ie/cms/cms.jsp?menu_id=34963', 'reach': -1, 'similarity': 0.115}, {'url': 'https://www.autoexpress.co.uk/best-cars/103133/best-new-cars-for-2020/page/0/4', 'reach': 60, 'similarity': 0.284}, {'url': 'https://teslamotorsclub.com/tmc/threads/vw-will-trample-tesla.109291/page-7', 'reach': 40, 'similarity': 0.066}, {'url': 'https://www.autoexpress.co.uk/best-cars/103133/best-new-cars-for-2020/page/0/3', 'reach': 60, 'similarity': 0.284}, {'url': 'https://teslamotorsclub.com/tmc/threads/vw-will-trample-tesla.109291/page-8', 'reach': 40, 'similarity': 0.084}, {'url': 'https://www.lse.co.uk/ShareChat.asp?ShareTicker=AML&share=Aston-Martin-Lagonda&thread=1D12CC4C-1A61-43B8-BDE9-5C330883735E', 'reach': 3, 'similarity': 0.100}, {'url': 'http://static.autoexpress.co.uk/authors/jonathan-burn', 'reach': 60, 'similarity': 0.035}, {'url': 'https://www.geekzone.co.nz/forums.asp?forumid=162&topicid=197896&page_no=93', 'reach': 5, 'similarity': 0.096}, {'url': 'https://www.carusa.info/new-honda-cars-for-2020/', 'reach': 2, 'similarity': 0.051}, {'url': 'https://www.carbuyer.co.uk/news/167673/best-new-cars-coming-in-2020', 'reach': 30, 'similarity': 0.257}, {'url': 'https://www.driving.co.uk/news/features/best-new-cars-coming-2020/', 'reach': -1, 'similarity': 0.213}, {'url': 'https://www.autocar.co.uk/slideshow/global-preview-best-new-cars-coming-2020-and-beyond-0', 'reach': 60, 'similarity': 0.089}, {'url': 'https://cars.usnews.com/cars-trucks/future-cars', 'reach': 430, 'similarity': 0.012}, {'url': 'https://www.carwow.co.uk/news/4498/geneva-motor-show-best-new-cars-coming-2020', 'reach': 10, 'similarity': 0.212}, {'url': 'https://www.autoguide.com/auto-news/2020/01/top-10-most-anticipated-new-cars-coming-in-2020.html', 'reach': 20, 'similarity': 0.231}, {'url': 'https://www.esquire.com/uk/design/g30563856/best-cars-2020/', 'reach': 210, 'similarity': 0.230}, {'url': 'https://www.consumerreports.org/new-cars/new-cars-on-the-horizon/', 'reach': 170, 'similarity': 0.019}, {'url': 'https://www.kbb.com/best-cars/top-10-our-10-favorite-new-2020-cars/', 'reach': 310, 'similarity': 0.078}]
+
         return render_template('competitors.html', result=competitors)
     return render_template('competitors.html')
 

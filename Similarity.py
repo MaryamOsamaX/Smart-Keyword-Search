@@ -26,4 +26,4 @@ def getSimilarity(txt_1, url_2):
     precision and recall
     f = 2 * (recall + precision) / (recall * precision)
     '''
-    return scores[0]['rouge-l']['f']
+    return round(scores[0]['rouge-l']['f'],3)
