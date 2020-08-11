@@ -1,19 +1,22 @@
 from newspaper import Article
-
+from unused.ScrapPage import *
 
 def scrap(url):
     toi_article = Article(url, language="en")
+    try:
+        # To download the article
+        toi_article.download()
+        ''''''
+        # To parse the article
+        toi_article.parse()
 
-    # To download the article
-    toi_article.download()
-    ''''''
-    # To parse the article
-    toi_article.parse()
-
-    # To perform natural language processing ie..nlp
-    toi_article.nlp()
-
-    return toi_article.title, toi_article.text, toi_article.keywords
+        # To perform natural language processing ie..nlp
+        toi_article.nlp()
+        title, article, keywords =toi_article.title, toi_article.text, toi_article.keywords
+    except:
+        print('Using the second try')
+        title, article, keywords = scrap_Page(url)
+    return title, article, keywords
 
 
 if __name__ == '__main__':

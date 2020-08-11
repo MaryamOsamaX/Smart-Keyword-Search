@@ -23,13 +23,13 @@
 <style>
 
     .low {
-    color: blue;
+    color: #02cb0e;
 }
     .high {
-    color: red;
+    color: #e40900;
 }
     .mid {
-    color: yellow;
+    color: #ffca00;
 }
 
     .toolbar {
@@ -162,8 +162,8 @@ window.addEventListener("load", function () {
 
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-     <a href="\homepage.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-user"></i>Home</a>
-   <a href="\competitors.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users"></i>competitors</a>
+     <a href="\homepage" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-user"></i>Home</a>
+   <a href="\competitors" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users"></i>competitors</a>
 
   </div>
 </nav>
@@ -184,16 +184,16 @@ window.addEventListener("load", function () {
 
 
 
-<form class="example" action="/keywords.html" style="margin:auto;max-width:700px">
+<form class="example" action="/keywords" method="post" style="margin:auto;max-width:700px">
   <input type="text" placeholder="Enter your URL (search for keywords)" name="URL" id='URL'>
-  <button type="submit" formaction="/keywords.html" onclick="return validate();"><i class="fa fa-search"></i></button>
+  <button type="submit" formaction="/keywords"  onclick="return validate();"><i class="fa fa-search"></i></button>
 
 </form>
 
 <div class="container-table100">
       <div class="wrap-table100">
              <div class="w3-bar">
-  <button class="w3-button w3-blue exportToExcel"  onclick="exportTableToExcel('table')">Download CSV</button> <br> <br>
+  <button class="w3-button w3-blue exportToExcel"  onclick="exportToCsv({{ result }})">Download CSV</button> <br> <br>
 </div>
         <div class="table100">
           <table id="table" class="table2excel" data-tableName="Test Table 1">
@@ -214,8 +214,7 @@ window.addEventListener("load", function () {
             </thead>
             <tbody>
 			 {% if result %}
-                    {% set sort_on = request.args.sort_on|default('volume') %}
-                    {% for item in result|sort(attribute=sort_on) %}
+                    {% for item in result %}
                               <tr class="noExl">
 						          <td class="column2">{{item.text}}</td>
                                     {% if item.competition=="High" %}
@@ -228,37 +227,37 @@ window.addEventListener("load", function () {
                                     {% endif %}
 
                                   {% if item.volume==-1 %}
-                                    <td class="column2">_</td>
+                                    <td class="column2"></td>
                                   {% else %}
                  			          <td class="column2">{{item.volume}}</td>
                                   {% endif %}
                                   {% if item.avgVolume==-1 %}
-                                     <td class="column2">_</td>
+                                     <td class="column2"></td>
                                   {% else %}
 							         <td class="column2">{{item.avgVolume}}</td>
                                   {% endif %}
                                     {% if item.relevance==-1 %}
-                              <td class="column2">_</td>
+                              <td class="column2"></td>
                               {% else %}
                                   <td class="column2">{{item.relevance}}</td>
                               {% endif %}
                                 {% if item.avgCpc==-1 %}
-                              <td class="column2">_</td>
+                              <td class="column2"></td>
                               {% else %}
                                   <td class="column2">{{item.avgCpc}}</td>
                               {% endif %}
                                 {% if item.clicks==-1 %}
-                              <td class="column2">_</td>
+                              <td class="column2"></td>
                               {% else %}
                                   <td class="column2">{{item.clicks}}</td>
                               {% endif %}
                                 {% if item.ctr==-1 %}
-                              <td class="column2">_</td>
+                              <td class="column2"></td>
                               {% else %}
                                   <td class="column2">{{item.ctr}}</td>
                               {% endif %}
                                 {% if item.impressions==-1 %}
-                              <td class="column2">_</td>
+                              <td class="column2"></td>
                               {% else %}
                                   <td class="column2">{{item.impressions}}</td>
                               {% endif %}
@@ -336,6 +335,35 @@ function exportTableToExcel(tableID, filename = ''){
         downloadLink.click();
     }
 }
+function exportToCsv(result) {
+    var downloadLink;
+    downloadLink = document.createElement("a");
+    filename='keywords.csv'
+    document.body.appendChild(downloadLink);
+    var csv = result.map(function(d){
+        return JSON.stringify(Object.values(d));
+})
+.join('\n')
+.replace(/(^\[)|(\]$)/mg, '');
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: "data:text/csv;charset=utf-8,"
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + "data:text/csv;charset=utf-8,"+
+            'Keyword, Competition, Volume, avgVolume, Relevance, SuggestedBid, avgCpc, avgPosition, Clicks, CTR, Impressions, TotalCost, Rate, Source \n'+ csv;
+
+        // Setting the file name
+        downloadLink.download = filename;
+
+        //triggering the function
+        downloadLink.click();
+    }
+
+}
+
 $(document).ready(function() {
     $('#table').DataTable( {
         "dom": '<"toolbar">frtip'

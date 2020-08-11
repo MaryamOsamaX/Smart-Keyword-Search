@@ -155,15 +155,15 @@ def findKeywords(url):
             elif str(keywordsWithData[i]['competition']) == 'High' or str(keywordsWithData[i]['competition']) == 'high':
                 comp = 0.3
 
-            keywordsWithData[i]['rate'] = (0.1 * (keywordsWithData[i]['avgVolume'] + comp
-                                                  + keywordsWithData[i]['avgCpc'] + comp)
+            keywordsWithData[i]['rate'] = (0.07 * (keywordsWithData[i]['avgVolume'] + comp)
+                                                  + 0.06*keywordsWithData[i]['avgCpc']
                                            + 0.2 * (keywordsWithData[i]['relevance'] + keywordsWithData[i]['ctr']
                                                     + keywordsWithData[i]['impressions']+ keywordsWithData[i]['clicks']))
 
     print('fin data  ', time.time() - s)
-    res = sorted(keywordsWithData, key=lambda i: i['rate'], reverse=True)
-
-    return res[:100]
+    r = sorted(keywordsWithData, key=lambda i: i['rate'], reverse=True)
+    res = sorted(r[:100], key=lambda i: i['volume'], reverse=True)
+    return res
 
 
 if __name__ == '__main__':
@@ -171,7 +171,7 @@ if __name__ == '__main__':
     ss = time.time()
     ks = findKeywords(url)
     original_stdout = sys.stdout
-    with open('filename1.txt', 'w') as f:
+    with open('filename2.txt', 'w') as f:
         sys.stdout = f  # Change the standard output to the file we created.
         print(ks)
         sys.stdout = original_stdout
