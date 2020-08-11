@@ -3,8 +3,7 @@ from ScrapArticle import *
 import Keywords_Search
 import Competitor_Main
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
-
+app = Flask(__name__,template_folder='templates', static_folder='static')
 
 # 1
 @app.route('/')
