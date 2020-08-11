@@ -161,9 +161,9 @@ def findKeywords(url):
                                                     + keywordsWithData[i]['impressions']+ keywordsWithData[i]['clicks']))
 
     print('fin data  ', time.time() - s)
-    res = sorted(keywordsWithData, key=lambda i: i['rate'], reverse=True)
-
-    return res[:100]
+    r = sorted(keywordsWithData, key=lambda i: i['rate'], reverse=True)
+    res = sorted(r[:100], key=lambda i: i['volume'], reverse=True)
+    return res
 
 
 if __name__ == '__main__':

@@ -214,8 +214,7 @@ window.addEventListener("load", function () {
             </thead>
             <tbody>
 			 {% if result %}
-                    {% set sort_on = request.args.sort_on|default('volume') %}
-                    {% for item in result|sort(attribute=sort_on) %}
+                    {% for item in result) %}
                               <tr class="noExl">
 						          <td class="column2">{{item.text}}</td>
                                     {% if item.competition=="High" %}

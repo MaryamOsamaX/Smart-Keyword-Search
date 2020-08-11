@@ -103,8 +103,8 @@ def get_comps(url, title, article): #Should we add title???
         c['reach'] = comp.traffic_reach
         c['similarity'] = comp.similarity
         comps.append(c)
-
-    return comps
+    cs =sorted(comps, key=lambda i: i['reach'], reverse=True)
+    return cs
 
 
 if __name__ == '__main__':
