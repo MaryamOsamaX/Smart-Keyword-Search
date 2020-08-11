@@ -130,8 +130,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-     <a href="\homepage.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-user"></i>Home</a>
-   <a href="\keywords.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users"></i>Analysis</a>
+     <a href="\homepage" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-user"></i>Home</a>
+   <a href="\keywords" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users"></i>Analysis</a>
 
   </div>
 </nav>
@@ -152,9 +152,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 
 
-<form class="example" action="/keywords.html" style="margin:auto;max-width:700px">
-  <input type="text" placeholder="Enter your URL (search for keywords)" name="URL" id="URL">
-  <button type="submit" formaction="/competitors.html" onclick="return validate();"><i class="fa fa-search"></i></button>
+<form class="example" action="/competitors" method="post" style="margin:auto;max-width:700px">
+  <input type="text" placeholder="Enter your URL (search for competitors)" name="URL" id="URL">
+  <button type="submit" formaction="/competitors" onclick="return validate();"><i class="fa fa-search"></i></button>
 
 </form>
 
@@ -179,7 +179,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                               <tr class="noExl">
                                   <td class="column2"><a href={{ item.url}}>{{item.url}}</a></td>
                                   {% if item.reach == -1 %}
-                                      <td class="column2">_</td>
+                                      <td class="column2"></td>
                                   {% else %}
                                   <td class="column2">{{item.reach}}</td>
                                   {% endif %}
