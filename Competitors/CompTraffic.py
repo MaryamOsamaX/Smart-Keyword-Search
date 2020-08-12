@@ -40,7 +40,7 @@ def refresh_credentials(user):
     client_idp = boto3.client('cognito-idp', region_name=cognito_region, aws_access_key_id='', aws_secret_access_key='')
     client_identity = boto3.client('cognito-identity', region_name='us-east-1')
 
-    password = 'PUT_PASSWORD_HERE'
+    password = 'Kiddo1412'
     # print(user)
     # print(password)
     response = client_idp.initiate_auth(
@@ -108,8 +108,8 @@ def sortQueryString(queryString):
 
 def getWebPageReach(url):
     opts = {}
-    opts['key'] = "PUT_KEY_HERE"
-    opts['user'] = "PUT_USER_HERE"
+    opts['key'] = "8hLh29Md5h6tcaM5E16Je1t0evGVhHmz71nGs7Vw"
+    opts['user'] = "ysamir1998@gmail.com"
     opts['action'] = "TrafficHistory"
     opts['options'] = "&Range=1&ResponseGroup=History&Url=" + url
 
@@ -215,36 +215,19 @@ def getWebPageReach(url):
     # ************* SEND THE REQUEST *************
     request_url = endpoint + canonical_uri + "?" + canonical_querystring
 
-    # print('\nBEGIN REQUEST++++++++++++++++++++++++++++++++++++')
-    # print('Request URL = ' + request_url)
     r = requests.get(request_url, headers=headers)
-
-    # print('\nRESPONSE++++++++++++++++++++++++++++++++++++')
-    # print('Response code: %d\n' % r.status_code)
-    # print(r.text)
-
-    #Data sample
-    contents = '''<Data>
-        <Data>2020-07-29</Date>
-        <PageViews>
-            <PerMillion>13</PerMillion>
-            <PerUser>1.30</PerUser>
-        </PageViews>
-        <Rank>1841</Rank>
-        <Reach>
-            <PerMillion>450</PerMillion>
-        </Reach>
-    </Data>'''
-
     soup = BeautifulSoup(r.text, 'xml')
-    # views = soup.find('PageViews')
-    # print(views.find('PerMillion').text)
     if soup.find('Reach'):
-        return int(soup.find('Reach').text)
+        s=(soup.find('Reach').text).split('\n')
+        if len(s) ==3:
+            return int(round(float(s[1])))
+        else:
+            return int(round(float(s[0])))
+
     else:
         return -1
 
 
 if __name__ == '__main__':
-    url = input('Enter URL: ')
+    url = 'https://www.edureka.co/blog/top-10-trending-technologies/'
     print('Reach = ', getWebPageReach(url))

@@ -1,6 +1,4 @@
-@charset "UTF-8";
-@import url(font-awesome.min.css);
-@import url(http://fonts.googleapis.com/css?family=Raleway:700,400);
+box@charset "UTF-8";
 
 /*
 	Transit by TEMPLATED
@@ -1045,7 +1043,7 @@
 /* Banner */
 
 	#banner {
-		background-image: url(../images/Animated-Ripples-Background-HTML-CSS.gif);
+		background-image: url('../static/1.gif');
 		background-position: center center;
 		background-size: cover;
 		color: #ffffff;

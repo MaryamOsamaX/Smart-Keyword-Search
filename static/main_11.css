@@ -187,7 +187,7 @@ a:active {
    #BACKGROUND
    ========================================================================== */
 .bg-img-1 {
-  background: url("../images/Animated-Ripples-Background-HTML-CSS.gif") center center/cover no-repeat;
+  background: url("../static/1.gif") center center/cover no-repeat;
 }
 
 /* ==========================================================================
@@ -212,24 +212,24 @@ a:active {
 }
 
 .p-t-165 {
-  padding-top: 165px;
+  padding-top: 7%;
 }
 
-@media (max-width: 767px) {
-  .p-t-165 {
-    padding-top: 120px;
-  }
-}
+/*@media (max-width: 767px) {*/
+/*  .p-t-165 {*/
+/*    padding-top: 120px;*/
+/*  }*/
+/*}*/
 
-.p-b-100 {
-  padding-bottom: 100px;
-}
+/*.p-b-100 {*/
+/*  padding-bottom: 100px;*/
+/*}*/
 
-@media (max-width: 767px) {
-  .p-b-100 {
-    padding-bottom: 250px;
-  }
-}
+/*@media (max-width: 767px) {*/
+/*  .p-b-100 {*/
+/*    padding-bottom: 250px;*/
+/*  }*/
+/*}*/
 
 .m-r-45 {
   margin-right: 45px;

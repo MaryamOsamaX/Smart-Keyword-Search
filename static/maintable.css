@@ -6,8 +6,11 @@
 
 @font-face {
   font-family: OpenSans-Regular;
-  src: url('../fonts/OpenSans/OpenSans-Regular.ttf'); 
 }
+
+
+
+
 
 
 
@@ -104,8 +107,7 @@ iframe {
 
 .container-table100 {
   width: 100%;
-  min-height: 100vh;
-  background: #;
+  min-height: 0vh ;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -167,12 +169,12 @@ table td.r, table th.r {
   color: #ffffff;
   line-height: 1.2;
   font-weight: unset;
-  border :1px solid blue;
+  border :1px solid black;
 }
 
 tbody tr:nth-child(even) {
   background-color: #f5f5f5;
-    border :1px solid blue;
+    border :1px solid black;
 }
 
 tbody tr {
@@ -181,51 +183,44 @@ tbody tr {
   color: #808080;
   line-height: 1.2;
   font-weight: unset;
-   border :1px solid blue;
+   border :1px solid black;
 }
 
 tbody tr:hover {
   color: #555555;
   background-color: #f5f5f5;
   cursor: pointer;
-   border :1px solid blue;
+   border :1px solid black;
 }
+.col{
+     border :1px solid black;
 
+}
 .column1 {
   width: 260px;
   padding-left: 40px;
-   border :1px solid blue;
+   border :1px solid black;
 }
 
 .column2 {
-  width: 170px;
+  width: 150px;
    border :1px solid black;
 }
 
 .column3 {
-   width: 170px;
-   border :1px solid blue;
+   width: 300px;
+   border :1px solid black;
 }
 
 .column4 {
-   width: 170px;
-  text-align: center;
-   border :1px solid blue;
+   width: 50px;
+   border :1px solid black;
 }
 
 .column5 {
   width: 170px;
   text-align: center;
-   border :1px solid blue;
 }
-
-.column6 ,.colume7,.colume8,.colume9,.colume10,.colume11,.colume12,.colume13{
-   width: 170px;
-  text-align: center;
-
-   border :1px solid blue;
-}
-
 
 @media screen and (max-width: 992px) {
   table {
@@ -281,11 +276,6 @@ tbody tr:hover {
     content: "Total";
   }
 
-  .column4,
-  .column5,
-  .column6 {
-    text-align: left;
-  }
 
   .column4,
   .column5,
@@ -293,7 +283,7 @@ tbody tr:hover {
   .column1,
   .column2,
   .column3 {
-    width: 100%;
+    width: 70%;
   }
 
   tbody tr {
@@ -305,5 +295,6 @@ tbody tr:hover {
   .container-table100 {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 5%;
   }
 }
