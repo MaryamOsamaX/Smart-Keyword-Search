@@ -76,9 +76,13 @@ def getURLs(url, title):
             final_results = list(dict.fromkeys(final_results))
             if(len(final_results) >= 50):
                 break
+    # print("urls: ",final_results )
     if url in final_results:
         final_results.remove(url)
-    # for i in final_results:
-    #     if '.pdf' in i:
-    #         final_results.remove(i)
+
+
+    for i in final_results:
+        if '.pdf' in i:
+            final_results.remove(i)
+    # print("urls: ", final_results)
     return final_results

@@ -186,8 +186,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                                   {% else %}
                                   <td class="column2">{{item.reach}}</td>
                                   {% endif %}
-                                    {% set similarity = item.similarity * 100 %}
-                                  <td class="column2">{{ '%0.1f' % similarity|float}}%</td>
+{#                                    {% set similarity = item.similarity * 100 %}#}
+                                  <td class="column2">{{ item.similarity}}</td>
                               </tr>
 			        {% endfor %}
 			 {% endif %}
