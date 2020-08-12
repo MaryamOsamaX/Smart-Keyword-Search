@@ -9,7 +9,9 @@ from ScrapArticle import scrap
 from rouge import Rouge
 
 
+
 def getSimilarity(txt_1, txt_2):
+
     rouge = Rouge()
     scores = rouge.get_scores(txt_1, txt_2)
 
@@ -22,4 +24,4 @@ def getSimilarity(txt_1, txt_2):
     precision and recall
     f = 2 * (recall + precision) / (recall * precision)
     '''
-    return scores[0]['rouge-l']['f']
+    return round(scores[0]['rouge-l']['f'],3)
