@@ -29,15 +29,17 @@ def getKeywords_Original_Semantics(article, keywords1):
         keywords.append(keyword)
         textonly.append(str(k))
 
+    sk=[]
     for i in SemanticsKeywords:
-        i = clearKeywords(i)
-        for k in i:
-            if k not in articleKeywords:
-                keyword = {}
-                keyword['text'] = k
-                keyword['source'] = 'semantics'
-                keywords.append(keyword)
-                textonly.append(str(k))
+        sk.extend(i)
+    ssk=clearKeywords(list(set(sk)))
+    for k in ssk:
+        if k not in articleKeywords:
+            keyword = {}
+            keyword['text'] = k
+            keyword['source'] = 'related'
+            keywords.append(keyword)
+            textonly.append(str(k))
 
     return keywords, list(set(textonly))
 
@@ -121,6 +123,12 @@ def get_keywords_data_50(keywords_text, url):
 
     return keywordsWithData
 
+def x(d):
+    if d == -1:
+        return 0
+    else:
+        return d
+
 
 def findKeywords(url):
     s = time.time()
@@ -155,15 +163,15 @@ def findKeywords(url):
             elif str(keywordsWithData[i]['competition']) == 'High' or str(keywordsWithData[i]['competition']) == 'high':
                 comp = 0.3
 
-            keywordsWithData[i]['rate'] = (0.07 * (keywordsWithData[i]['avgVolume'] + comp)
-                                                  + 0.06*keywordsWithData[i]['avgCpc']
-                                           + 0.2 * (keywordsWithData[i]['relevance'] + keywordsWithData[i]['ctr']
-                                                    + keywordsWithData[i]['impressions']+ keywordsWithData[i]['clicks']))
+            keywordsWithData[i]['rate'] = (0.07 * (x(keywordsWithData[i]['avgVolume']) + comp)
+                                                  + 0.06* x(keywordsWithData[i]['avgCpc'])
+                                           + 0.2 * (x(keywordsWithData[i]['relevance']) + x(keywordsWithData[i]['ctr'])
+                                                    + x(keywordsWithData[i]['impressions'])+ x(keywordsWithData[i]['clicks'])))
 
     print('fin data  ', time.time() - s)
     r = sorted(keywordsWithData, key=lambda i: i['rate'], reverse=True)
     # res = sorted(r[:100], key=lambda i: i['volume'], reverse=True)
-    return r
+    return r[:100]
 
 
 if __name__ == '__main__':

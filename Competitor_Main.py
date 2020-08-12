@@ -14,7 +14,7 @@ import sys
 
 '''
 def get_all_comps(url, title):
-    '''
+    
     this function does the following:
     ---------------------------------
         1- get urls of comps
@@ -23,7 +23,7 @@ def get_all_comps(url, title):
         4- get keywords
         
         #in the end... return list of distinct ordered by traffic comps
-    '''
+    
     competitors = []
     # 1- get urls
     urls = []

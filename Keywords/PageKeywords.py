@@ -11,7 +11,8 @@ def get_PageKewords(article, additionalKeywords):
     textRankKeywords = TextRank.get_TextRank(article, 10)
     k_y4 = YAKE.get_keywords(article, 3, 20)
     rake= get_RAKE(article)
-    pageKeywords = additionalKeywords
+    pageKeywords = []
+    #pageKeywords = additionalKeywords
     addUnique(pageKeywords, k_y4)
     addUnique(pageKeywords, textRankKeywords)
     addUnique(pageKeywords, rake)
