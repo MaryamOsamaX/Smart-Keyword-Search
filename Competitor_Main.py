@@ -85,37 +85,44 @@ def get_comps_keywords(url, title):  # till finish all
 
 
 def get_comps(url, title, article): #Should we add title???
-    competitors = []
+    competitors_ = []
     urls = getURLs(url, title)
     for i in range(len(urls)):
         s = Competitor()
         s.url = urls[i]
-        competitors.append(s)
+        competitors_.append(s)
 
     #check the list
-    competitors = get_distict_comps(competitors)
-    
-    # 2- get traffic reach
-    for comp in competitors:
-        comp.traffic_reach = getWebPageReach(comp.url)
+    competitors = get_distict_comps(competitors_)
 
-    # 3- get similarity
+    # 2- get similarity
     for comp in competitors:
         comp.similarity = getSimilarity(article, comp.text)
 
+    # 3- get traffic reach
+    for comp in competitors:
+        comp.traffic_reach = getWebPageReach(comp.url)
+
+
+
     comps = []
     for comp in competitors:
-        c = {}
-        c['url'] = comp.url
-        c['reach'] = comp.traffic_reach
-        c['similarity'] = comp.similarity
-        comps.append(c)
+        #print(comp.url,' ',comp.traffic_reach,' ',comp.similarity)
+        if comp.similarity == -1 :
+            continue
+        else:
+            c = {}
+            c['url'] = comp.url
+            c['reach'] = comp.traffic_reach
+            c['similarity'] = comp.similarity
+            comps.append(c)
+
     cs =sorted(comps, key=lambda i: i['reach'], reverse=True)
     return cs
 
 def get_distict_comps(comps):
     for comp in comps:
-        comp.text = scrap(comp.url)
+        title, comp.text, keywords = scrap(comp.url)
         
     #list of pages that appears twice in the comp
     matches = []

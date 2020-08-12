@@ -11,17 +11,19 @@ from rouge import Rouge
 
 
 def getSimilarity(txt_1, txt_2):
+    try:
+        rouge = Rouge()
+        scores = rouge.get_scores(txt_1, txt_2)
 
-    rouge = Rouge()
-    scores = rouge.get_scores(txt_1, txt_2)
-
-    '''
-    our main concern is the value of rouge-l which stands for the Longest Common 
-    Subsequence takes into account sentence level structure similarity naturally and
-    identifies longest co-occurring in sequence n-grams automatically.
-    
-    then the value of f is our goal as it's the f measure the harmonic mean of 
-    precision and recall
-    f = 2 * (recall + precision) / (recall * precision)
-    '''
-    return round(scores[0]['rouge-l']['f'],3)
+        '''
+        our main concern is the value of rouge-l which stands for the Longest Common 
+        Subsequence takes into account sentence level structure similarity naturally and
+        identifies longest co-occurring in sequence n-grams automatically.
+        
+        then the value of f is our goal as it's the f measure the harmonic mean of 
+        precision and recall
+        f = 2 * (recall + precision) / (recall * precision)
+        '''
+        return round(scores[0]['rouge-l']['f'],3)
+    except:
+        return -1
