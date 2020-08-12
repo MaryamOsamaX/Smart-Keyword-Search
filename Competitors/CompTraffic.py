@@ -215,34 +215,14 @@ def getWebPageReach(url):
     # ************* SEND THE REQUEST *************
     request_url = endpoint + canonical_uri + "?" + canonical_querystring
 
-    # print('\nBEGIN REQUEST++++++++++++++++++++++++++++++++++++')
-    # print('Request URL = ' + request_url)
     r = requests.get(request_url, headers=headers)
-
-    # print('\nRESPONSE++++++++++++++++++++++++++++++++++++')
-    # print('Response code: %d\n' % r.status_code)
-    # print(r.text)
-
-    #Data sample
-    contents = '''<Data>
-        <Data>2020-07-29</Date>
-        <PageViews>
-            <PerMillion>13</PerMillion>
-            <PerUser>1.30</PerUser>
-        </PageViews>
-        <Rank>1841</Rank>
-        <Reach>
-            <PerMillion>450</PerMillion>
-        </Reach>
-    </Data>'''
-
     soup = BeautifulSoup(r.text, 'xml')
-    # views = soup.find('PageViews')
-    # print(views.find('PerMillion').text)
-   # print(soup.find('Reach').text)
     if soup.find('Reach'):
         s=(soup.find('Reach').text).split('\n')
-        return int(round(float(s[1])))
+        if len(s) ==3:
+            return int(round(float(s[1])))
+        else:
+            return int(round(float(s[0])))
 
     else:
         return -1

@@ -162,8 +162,8 @@ def findKeywords(url):
 
     print('fin data  ', time.time() - s)
     r = sorted(keywordsWithData, key=lambda i: i['rate'], reverse=True)
-    res = sorted(r[:100], key=lambda i: i['volume'], reverse=True)
-    return res
+    # res = sorted(r[:100], key=lambda i: i['volume'], reverse=True)
+    return r
 
 
 if __name__ == '__main__':
