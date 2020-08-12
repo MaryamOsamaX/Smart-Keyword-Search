@@ -7,6 +7,7 @@ Created on Sat Aug  1 12:26:14 2020
 
 class Competitor:
     url = ""
+    text = ""
     traffic_reach = 0
     similarity = 0.0
     keywords = []

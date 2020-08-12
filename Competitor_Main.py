@@ -12,6 +12,7 @@ from Similarity import getSimilarity
 from ScrapArticle import *
 import sys
 
+'''
 def get_all_comps(url, title):
     '''
     this function does the following:
@@ -32,6 +33,9 @@ def get_all_comps(url, title):
         s.url = urls[i]
         competitors.append(s)
 
+    #check the list
+    competitors = get_distict_comps(competitors)
+    
     # 2- get traffic reach
     for comp in competitors:
         comp.traffic_reach = getWebPageReach(comp.url)
@@ -42,7 +46,7 @@ def get_all_comps(url, title):
 
     # 3- get similarity
     for comp in competitors:
-        comp.similarity = getSimilarity(url, comp.url)
+        comp.similarity = getSimilarity(url, comp.text)
 
     # 4- get keywords
     count = 0
@@ -54,7 +58,7 @@ def get_all_comps(url, title):
             break
 
     return competitors
-
+'''
 def sort_based_on_traffic_reach(elem):
     return elem.traffic_reach
 
@@ -88,13 +92,16 @@ def get_comps(url, title, article): #Should we add title???
         s.url = urls[i]
         competitors.append(s)
 
+    #check the list
+    competitors = get_distict_comps(competitors)
+    
     # 2- get traffic reach
     for comp in competitors:
         comp.traffic_reach = getWebPageReach(comp.url)
 
     # 3- get similarity
     for comp in competitors:
-        comp.similarity = getSimilarity(article, comp.url)
+        comp.similarity = getSimilarity(article, comp.text)
 
     comps = []
     for comp in competitors:
@@ -106,6 +113,20 @@ def get_comps(url, title, article): #Should we add title???
     cs =sorted(comps, key=lambda i: i['reach'], reverse=True)
     return cs
 
+def get_distict_comps(comps):
+    for comp in comps:
+        comp.text = scrap(comp.url)
+        
+    #list of pages that appears twice in the comp
+    matches = []
+    for i in range (len(comps)):
+        for j in range(i+1, len(comps)):
+            if (comps[i].text == comps[j].text):
+                matches.append(comps[j])
+            
+    for match in matches:
+        comps.remove(match)
+    return comps
 
 if __name__ == '__main__':
     # #########################################################
