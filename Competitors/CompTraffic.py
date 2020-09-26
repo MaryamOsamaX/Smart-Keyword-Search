@@ -40,7 +40,7 @@ def refresh_credentials(user):
     client_idp = boto3.client('cognito-idp', region_name=cognito_region, aws_access_key_id='', aws_secret_access_key='')
     client_identity = boto3.client('cognito-identity', region_name='us-east-1')
 
-    password = 'Kiddo1412'
+    password = 'PASSWORD'
     # print(user)
     # print(password)
     response = client_idp.initiate_auth(
@@ -109,7 +109,7 @@ def sortQueryString(queryString):
 def getWebPageReach(url):
     opts = {}
     opts['key'] = "8hLh29Md5h6tcaM5E16Je1t0evGVhHmz71nGs7Vw"
-    opts['user'] = "ysamir1998@gmail.com"
+    opts['user'] = "USERNAME"
     opts['action'] = "TrafficHistory"
     opts['options'] = "&Range=1&ResponseGroup=History&Url=" + url
 
